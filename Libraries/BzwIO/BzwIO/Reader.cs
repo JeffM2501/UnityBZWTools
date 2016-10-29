@@ -12,7 +12,7 @@ namespace BZFlag.IO
 		internal static string TrimTrainingComments(string text)
 		{
 			if (text.Contains("#"))
-				text = text.Substring(0, text.IndexOf('#') - 1).Trim();
+				text = text.Substring(0, text.IndexOf('#')).Trim();
 			return text;
 		}
 
@@ -20,7 +20,7 @@ namespace BZFlag.IO
 		{
 			string tmp = TrimTrainingComments(text);
 			if(tmp.Contains(" "))
-				tmp = text.Substring(0, text.IndexOf(' ') - 1).Trim();
+				tmp = text.Substring(0, text.IndexOf(' ')).Trim();
 			return tmp;
 		}
 
@@ -32,13 +32,13 @@ namespace BZFlag.IO
 			return tmp;
 		}
 
-		internal static List<double> ParseDoubleVector(string line)
+		internal static List<float> ParseFloatVector(string line)
 		{
-			List<double> vec = new List<double>();
+			List<float> vec = new List<float>();
 			foreach(string s in line.Split(" ".ToCharArray()))
 			{
-				double d = 0;
-				double.TryParse(s, out d);
+				float d = 0;
+				float.TryParse(s, out d);
 				vec.Add(d);
 			}
 			return vec;
@@ -56,18 +56,19 @@ namespace BZFlag.IO
 				if (line == string.Empty || line[0] == '#')
 					continue;
 
+				string cmd = GetFirstWord(line).ToUpperInvariant();
+
 				if (obj == null)
 				{
-					obj = new BasicObject();
+					obj = ElementFactory.Create(cmd);
 					obj.ObjectType = TrimTrainingComments(line);
 				}
 				else
 				{
-					string cmd = GetFirstWord(line).ToUpperInvariant();
 					if (cmd == "END")
 					{
 						obj.Finish();
-						map.Objects.Add(obj);
+						map.AddObject(obj);
 						obj = null;
 					}
 					else
@@ -79,7 +80,7 @@ namespace BZFlag.IO
 			if (obj != null)	// should not happen, but don't loose data
 			{
 				obj.Finish();
-				map.Objects.Add(obj);
+				map.AddObject(obj);
 				obj = null;
 			}
 
