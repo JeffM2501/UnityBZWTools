@@ -34,4 +34,17 @@ public class BZWWorld : BZWBasicObject
 
 		Attributes = world.Attributes;
 	}
+
+	public override BZFlag.IO.Elements.BasicObject ToBZWObject()
+	{
+		var world =  new BZFlag.IO.Elements.World();
+
+		world.Name = Name;
+		world.Size = Size;
+		world.NoWalls = NoWalls;
+		world.FreeCTFSpawns = FreeCTFSpawns;
+		world.Attributes = Attributes;
+
+		return world;
+	}
 }

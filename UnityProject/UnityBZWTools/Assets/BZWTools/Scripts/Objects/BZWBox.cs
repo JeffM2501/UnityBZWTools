@@ -22,5 +22,12 @@ public class BZWBox : BZWBasicObject
 		SetupFromPoisitionalbe(box);
 	}
 
-	
+	public override BZFlag.IO.Elements.BasicObject ToBZWObject()
+	{
+		var obj = new BZFlag.IO.Elements.Shapes.Box();
+
+		OutputToPoisitionalbe(obj);
+
+		return obj;
+	}
 }

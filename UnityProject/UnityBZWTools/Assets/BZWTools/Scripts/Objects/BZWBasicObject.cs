@@ -33,4 +33,19 @@ public class BZWBasicObject : MonoBehaviour
 		this.transform.localRotation = Quaternion.AngleAxis(-p.Rotation, Vector3.up);
 		this.transform.localScale = new Vector3(p.Size[0], p.Size[2], p.Size[1]);
 	}
+
+	public void OutputToPoisitionalbe(BZFlag.IO.Elements.Shapes.PositionableObject p)
+	{
+		p.Name = Name;
+
+		p.Position[0] = this.transform.localPosition.x;
+		p.Position[2] = this.transform.localPosition.y;
+		p.Position[1] = this.transform.localPosition.z;
+
+		p.Rotation = -this.transform.localRotation.eulerAngles.y;
+
+		p.Size[0] = this.transform.localScale.x;
+		p.Size[2] = this.transform.localScale.y;
+		p.Size[1] = this.transform.localScale.z;
+	}
 }

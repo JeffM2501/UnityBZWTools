@@ -22,4 +22,12 @@ public class BZWOptions : BZWBasicObject
 		Name = obj.Name;
 		Options = obj.Code;
 	}
+
+	public override BZFlag.IO.Elements.BasicObject ToBZWObject()
+	{
+		var options = new BZFlag.IO.Elements.Options();
+
+		options.Code = Options;
+		return options;
+	}
 }

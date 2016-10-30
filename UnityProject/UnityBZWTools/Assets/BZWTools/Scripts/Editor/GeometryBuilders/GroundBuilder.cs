@@ -7,7 +7,7 @@ public class GroundBuilder
 {
 	public static float GrassUVSCale = 0.125f;
 	public static float WallUVScale = 0.25f;
-	public static float WallHeight = 15;
+	public static float WallHeight = 20;
 
 	public static void BuildWalls(GameObject obj, BZWWorld world)
 	{

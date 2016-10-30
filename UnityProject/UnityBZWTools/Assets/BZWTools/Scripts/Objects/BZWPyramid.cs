@@ -3,6 +3,7 @@ using System.Collections;
 
 public class BZWPyramid : BZWBasicObject
 {
+	public bool FlipZ = false;
 
 	// Use this for initialization
 	void Start()
@@ -16,10 +17,21 @@ public class BZWPyramid : BZWBasicObject
 
 	}
 
-	public virtual void FromBZWObject(BZFlag.IO.Elements.Shapes.PositionableObject box)
+	public virtual void FromBZWObject(BZFlag.IO.Elements.Shapes.Pyramid py)
 	{
-		Name = box.Name;
-		SetupFromPoisitionalbe(box);
+		Name = py.Name;
+		SetupFromPoisitionalbe(py);
+		FlipZ = py.FlipZ;
+	}
+
+	public override BZFlag.IO.Elements.BasicObject ToBZWObject()
+	{
+		var obj = new BZFlag.IO.Elements.Shapes.Pyramid();
+
+		OutputToPoisitionalbe(obj);
+		obj.FlipZ = FlipZ;
+
+		return obj;
 	}
 
 
