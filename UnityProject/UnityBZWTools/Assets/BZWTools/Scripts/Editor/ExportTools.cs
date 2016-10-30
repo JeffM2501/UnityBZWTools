@@ -228,7 +228,6 @@ public class ExportTools : MonoBehaviour
 		return true;
 	}
 
-	[MenuItem("Custom/Export/")]
 	[MenuItem("BZWTools/Export/Export all MeshFilters in selection to separate OBJs")]
 	static void ExportSelectionToSeparate()
 	{
