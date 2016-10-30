@@ -5,7 +5,7 @@ using System.IO;
 using System;
 
 using BZFlag.IO;
-
+using BZFlag.IO.Elements.Shapes;
 
 public class IOMenus : MonoBehaviour
 {
@@ -41,19 +41,102 @@ public class IOMenus : MonoBehaviour
 		ReadUserBZW(path);
 	}
 
+	static void SetupRootObject(GameObject worldObj, Map map)
+	{
+		worldObj.AddComponent<BZWWorld>();
+		BZWWorld mapRoot = worldObj.GetComponent<BZWWorld>();
+		mapRoot.FromBZWObject(map.WorldInfo);
+
+		GameObject grass = new GameObject("_Grass");
+		grass.transform.SetParent(worldObj.transform, false);
+		GroundBuilder.BuildGrass(grass, mapRoot);
+
+		if (!map.WorldInfo.NoWalls)
+		{
+			GameObject walls = new GameObject("_Walls");
+			walls.transform.SetParent(grass.transform, false);
+			GroundBuilder.BuildWalls(walls, mapRoot);
+		}
+
+		// add map options
+		GameObject optionsObject = new GameObject("Options");
+		worldObj.AddComponent<BZWOptions>();
+		BZWOptions opt = worldObj.GetComponent<BZWOptions>();
+		optionsObject.transform.SetParent(worldObj.transform, false);
+		opt.FromBZWObject(map.WorldOptions);
+	}
+
+	static GameObject SetupPyramid(GameObject obj, Pyramid pyr)
+	{
+		BZWPyramid py = obj.AddComponent<BZWPyramid>() as BZWPyramid;
+		py.FromBZWObject(pyr);
+		PyramidBuilder.Build(obj, py);
+
+		return obj;
+	}
+
+	static GameObject SetupBox(GameObject obj, Box box)
+	{
+		GameObject newObj = new GameObject("walls");
+		newObj.transform.SetParent(obj.transform, false);
+
+		BZWBox bx = obj.AddComponent<BZWBox>() as BZWBox;
+		bx.FromBZWObject(box);
+
+		BoxBuilder.BuildRoof(obj, bx);
+		BoxBuilder.BuildWalls(obj, bx);
+
+		return obj;
+	}
+
 	static void ReadUserBZW(string path)
 	{
 		if(path != string.Empty)
 		{
-			Debug.Log("Path was " + path);
-
 			FileInfo file = new FileInfo(path);
 			StreamReader sr = file.OpenText();
 
 			var map = Reader.ReadMap(sr);
 			sr.Close();
 
-			Debug.Log("Read map has " + map.Objects.Count.ToString() + " objects");
+			// build the root world
+			GameObject worldObj = new GameObject("World_" + map.WorldInfo.Name);
+			SetupRootObject(worldObj, map);
+
+			// add all the sub objects
+			int count = 1;
+			foreach(var m in map.Objects)
+			{
+				string name = string.Empty;
+				if(m.Name != string.Empty)
+					name =  m.Name;
+				else
+					name = m.ObjectType + "_" + count.ToString();
+
+				if (m as BZFlag.IO.Elements.Shapes.Box != null)
+				{
+					GameObject newObj = new GameObject(name);
+					newObj.transform.SetParent(worldObj.transform, false);
+					SetupBox(newObj, m as BZFlag.IO.Elements.Shapes.Box);
+				}
+				else if(m as BZFlag.IO.Elements.Shapes.Pyramid != null)
+				{
+					GameObject newObj = new GameObject(name);
+					newObj.transform.SetParent(worldObj.transform, false);
+					SetupPyramid(newObj, m as BZFlag.IO.Elements.Shapes.Pyramid);
+				}
+				else
+				{
+					GameObject newObj = new GameObject(name);
+					newObj.AddComponent<BZWUnknown>();
+					BZWUnknown unk = newObj.GetComponent<BZWUnknown>();
+					newObj.transform.SetParent(worldObj.transform, false);
+					unk.FromBZWObject(m);
+				}
+				count++;
+			}
+
+			Debug.Log("Map Loaded: " + map.Objects.Count.ToString() + " objects");
 		}
 	}
 }
