@@ -15,6 +15,11 @@ namespace BZFlag.IO.Elements
 
 		public List<string> Attributes = new List<string>();
 
+		public World()
+		{
+			ObjectType = "World";
+		}
+
 		public override bool AddCodeLine(string command, string line)
 		{
 			if(!base.AddCodeLine(command, line))
@@ -34,6 +39,22 @@ namespace BZFlag.IO.Elements
 			}
 			else
 				return true;
+		}
+
+		public override void BuildCode()
+		{
+			Code.Clear();
+
+			AddCode(1,"size", Size);
+			AddCode(1, "flagHeight", FlagHeight);
+			if (NoWalls)
+				AddCode(1, "noWalls", string.Empty);
+
+			if(FreeCTFSpawns)
+				AddCode(1, "freeCTFSpawns", string.Empty);
+
+			foreach(var s in Attributes)
+				AddCode(2, s, string.Empty);
 		}
 	}
 }

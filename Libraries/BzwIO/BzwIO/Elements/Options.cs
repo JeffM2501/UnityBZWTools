@@ -7,5 +7,9 @@ namespace BZFlag.IO.Elements
 {
 	public class Options : BasicObject
 	{
+		public Options()
+		{
+			ObjectType = "Options";
+		}
 	}
 }

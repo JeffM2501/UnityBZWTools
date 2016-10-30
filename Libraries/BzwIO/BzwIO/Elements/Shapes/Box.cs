@@ -7,6 +7,6 @@ namespace BZFlag.IO.Elements.Shapes
 {
 	public class Box : PositionableObject
 	{
-	
+		
 	}
 }

@@ -24,5 +24,13 @@ namespace BZFlag.IO
 
 		}
 
+		public void PrepForSave()
+		{
+			WorldInfo.BuildCode();
+			WorldOptions.BuildCode();
+
+			foreach(var o in Objects)
+				o.BuildCode();
+		}
 	}
 }

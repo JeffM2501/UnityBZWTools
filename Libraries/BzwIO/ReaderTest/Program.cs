@@ -23,6 +23,19 @@ namespace ReaderTest
 
 			var map = Reader.ReadMap(sr);
 			sr.Close();
+
+			FileInfo newFile = new FileInfo(file.FullName + "_saved");
+
+			if(newFile.Exists)
+				newFile.Delete();
+
+			Stream s = newFile.OpenWrite();
+			StreamWriter sw = new StreamWriter(s);
+
+			Writer.WriteMap(sw, map);
+			sw.Close();
+			s.Close();
 		}
+
 	}
 }

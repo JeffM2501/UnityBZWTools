@@ -45,5 +45,16 @@ namespace BZFlag.IO.Elements.Shapes
 		{
 
 		}
+
+		public override void BuildCode()
+		{
+			Code.Clear();
+			if(Name != string.Empty)
+				AddCode(1, "name", Name);
+
+			AddCode(1, "position", Position);
+			AddCode(1, "rotation", Rotation);
+			AddCode(1, "size", Size);
+		}
 	}
 }
