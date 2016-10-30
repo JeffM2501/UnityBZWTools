@@ -28,14 +28,11 @@ namespace BZFlag.IO.Elements.Shapes
 
 					TeamColor = (TeamColors)c;
 				}
-
 				else
 					return false;
-
-				return true;
 			}
-			else
-				return true;
+
+			return true;
 		}
 
 		public override void BuildCode()

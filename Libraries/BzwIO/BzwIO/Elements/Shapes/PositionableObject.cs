@@ -34,11 +34,9 @@ namespace BZFlag.IO.Elements.Shapes
 					float.TryParse(Reader.GetRestOfWords(line), out Rotation);
 				else
 					return false;
-
-				return true;
 			}
-			else
-				return true;
+
+			return true;
 		}
 
 		public override void Finish()

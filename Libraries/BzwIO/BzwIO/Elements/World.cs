@@ -34,11 +34,9 @@ namespace BZFlag.IO.Elements
 					FreeCTFSpawns = true;
 				else
 					Attributes.Add(line);
-
-				return true;
 			}
-			else
-				return true;
+
+			return true;
 		}
 
 		public override void BuildCode()
