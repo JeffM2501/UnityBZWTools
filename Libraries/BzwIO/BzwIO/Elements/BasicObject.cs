@@ -14,6 +14,18 @@ namespace BZFlag.IO.Elements
 
 		public string Name = string.Empty;
 
+		public string GUID = string.Empty;
+
+
+		private static Random RNG = new Random();
+
+		public BasicObject()
+		{
+			ObjectType = "Unknown";
+
+			GUID = RNG.Next().ToString() + RNG.Next().ToString() + RNG.Next().ToString();
+		}
+
 		public virtual bool AddCodeLine(string command, string line)
 		{
 			Code.Add(line);

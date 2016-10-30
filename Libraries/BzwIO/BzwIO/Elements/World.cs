@@ -43,6 +43,9 @@ namespace BZFlag.IO.Elements
 		public override void BuildCode()
 		{
 			Code.Clear();
+			
+			if (Name != string.Empty)
+				AddCode(1, "name", Name);
 
 			AddCode(1,"size", Size);
 			AddCode(1, "flagHeight", FlagHeight);

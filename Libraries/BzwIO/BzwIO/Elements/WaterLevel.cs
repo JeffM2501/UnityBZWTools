@@ -10,6 +10,11 @@ namespace BZFlag.IO.Elements
 		public float Height = 0;
 		public List<string> Attributes = new List<string>();
 
+		public WaterLevel()
+		{
+			ObjectType = "WaterLevel";
+		}
+
 		public override bool AddCodeLine(string command, string line)
 		{
 			if (!base.AddCodeLine(command, line))

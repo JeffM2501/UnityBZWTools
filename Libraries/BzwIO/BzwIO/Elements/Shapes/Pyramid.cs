@@ -9,6 +9,11 @@ namespace BZFlag.IO.Elements.Shapes
 	{
 		public bool FlipZ = false;
 
+		public Pyramid()
+		{
+			ObjectType = "Pyramid";
+		}
+
 		public override bool AddCodeLine(string command, string line)
 		{
 			if(!base.AddCodeLine(command, line))

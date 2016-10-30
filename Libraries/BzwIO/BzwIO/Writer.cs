@@ -24,6 +24,9 @@ namespace BZFlag.IO
 
 		private static void WriteObject(StreamWriter outStream, BasicObject obj)
 		{
+			if(obj == null || obj.Code.Count == 0)
+				return;
+
 			outStream.WriteLine(obj.ObjectType);
 			foreach(var s in obj.Code)
 				outStream.WriteLine(s);

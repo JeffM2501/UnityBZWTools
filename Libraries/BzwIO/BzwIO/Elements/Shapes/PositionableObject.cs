@@ -11,6 +11,11 @@ namespace BZFlag.IO.Elements.Shapes
 		public float Rotation = 0;
 		public float[] Size = new float[] { 0, 0, 0 };
 
+		public PositionableObject()
+		{
+			ObjectType = "Unknown";
+		}
+
 		protected float[] ReadVector3(string line)
 		{
 			float[] v = new float[] { 0, 0, 0 };

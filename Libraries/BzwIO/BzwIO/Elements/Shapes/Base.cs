@@ -17,6 +17,11 @@ namespace BZFlag.IO.Elements.Shapes
 		}
 		public TeamColors TeamColor = TeamColors.Unknown;
 
+		public Base()
+		{
+			ObjectType = "Base";
+		}
+
 		public override bool AddCodeLine(string command, string line)
 		{
 			if(!base.AddCodeLine(command, line))
