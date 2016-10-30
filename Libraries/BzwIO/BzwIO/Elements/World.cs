@@ -7,7 +7,7 @@ namespace BZFlag.IO.Elements
 {
 	public class World : BasicObject
 	{
-		public float Size = 0;
+		public float Size = 400;
 		public float FlagHeight = 0;
 
 		public bool NoWalls = false;
@@ -18,6 +18,7 @@ namespace BZFlag.IO.Elements
 		public World()
 		{
 			ObjectType = "World";
+			Name = "Untitled BZW";
 		}
 
 		public override bool AddCodeLine(string command, string line)

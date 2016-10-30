@@ -26,9 +26,11 @@ namespace BZFlag.IO.Elements.Shapes
 		{
 			base.Finish();
 
-			if (Size[2] < 0 && ! FlipZ)
+			if ((Size[0] < 0 |  Size[1] < 0 || Size[2] < 0) && ! FlipZ)
 			{
 				FlipZ = true;
+				Size[0] = (float)Math.Abs(Size[0]);
+				Size[1] = (float)Math.Abs(Size[1]);
 				Size[2] = (float)Math.Abs(Size[2]);
 			}
 		}
