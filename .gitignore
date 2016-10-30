@@ -28,7 +28,8 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+# Others
 Debug
 Library
-/UnityProject/UnityBZWTools/Temp/ProcessJobs
-Temp
+/UnityProject/UnityBZWTools/Temp/
