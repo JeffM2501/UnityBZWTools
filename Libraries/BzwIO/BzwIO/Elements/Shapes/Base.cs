@@ -24,18 +24,15 @@ namespace BZFlag.IO.Elements.Shapes
 
 		public override bool AddCodeLine(string command, string line)
 		{
-			if(!base.AddCodeLine(command, line))
+			if(command == "COLOR")
 			{
-				if(command == "COLOR")
-				{
-					int c = 0;
-					int.TryParse(Reader.GetRestOfWords(line), out c);
+				int c = 0;
+				int.TryParse(Reader.GetRestOfWords(line), out c);
 
-					TeamColor = (TeamColors)c;
-				}
-				else
-					return false;
+				TeamColor = (TeamColors)c;
 			}
+			else if(!base.AddCodeLine(command, line))
+				return false;
 
 			return true;
 		}

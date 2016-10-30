@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class BZWBox : BZWBasicObject
 {
+	public List<string> Attributes = new List<string>();
 
 	// Use this for initialization
 	void Start ()
@@ -20,6 +21,8 @@ public class BZWBox : BZWBasicObject
 	{
 		Name = box.Name;
 		SetupFromPoisitionalbe(box);
+		Attributes = box.Attributes;
+		GUID = box.GUID;
 	}
 
 	public override BZFlag.IO.Elements.BasicObject ToBZWObject()
@@ -27,6 +30,8 @@ public class BZWBox : BZWBasicObject
 		var obj = new BZFlag.IO.Elements.Shapes.Box();
 
 		OutputToPoisitionalbe(obj);
+		obj.Attributes = Attributes;
+		obj.GUID = GUID;
 
 		return obj;
 	}

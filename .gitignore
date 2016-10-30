@@ -30,3 +30,5 @@ sysinfo.txt
 *.unitypackage
 Debug
 Library
+/UnityProject/UnityBZWTools/Temp/ProcessJobs
+Temp

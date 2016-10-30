@@ -26,6 +26,7 @@ public class BZWUnknown : BZWBasicObject
 		ObjectType = obj.ObjectType;
 		Name = obj.Name;
 		CodeLines = obj.Code;
+		GUID = obj.GUID;
 	}
 
 	public override BZFlag.IO.Elements.BasicObject ToBZWObject()
@@ -34,6 +35,7 @@ public class BZWUnknown : BZWBasicObject
 
 		obj.ObjectType = ObjectType;
 		obj.Code = CodeLines;
+		obj.GUID = GUID;
 
 		return obj;
 	}

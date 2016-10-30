@@ -16,13 +16,10 @@ namespace BZFlag.IO.Elements.Shapes
 
 		public override bool AddCodeLine(string command, string line)
 		{
-			if(!base.AddCodeLine(command, line))
-			{
-				if(command == "FLIPZ")
-					FlipZ = true;
-				else
-					return false;
-			}
+			if(command == "FLIPZ")
+				FlipZ = true;
+			else if(!base.AddCodeLine(command, line))
+				return false;
 
 			return true;
 		}

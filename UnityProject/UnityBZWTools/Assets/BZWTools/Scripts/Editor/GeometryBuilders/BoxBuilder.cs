@@ -232,6 +232,8 @@ public class BoxBuilder
 		mesh.normals = norms.ToArray();
 		mesh.triangles = tris.ToArray();
 
+		mesh.name = "Box";
+
 		filter.sharedMesh = mesh;
 
 		MeshRenderer render = obj.AddComponent<MeshRenderer>() as MeshRenderer;

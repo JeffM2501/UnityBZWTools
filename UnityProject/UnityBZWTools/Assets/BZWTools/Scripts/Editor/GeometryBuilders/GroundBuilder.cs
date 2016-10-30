@@ -143,6 +143,7 @@ public class GroundBuilder
 		mesh.normals = norms.ToArray();
 		mesh.triangles = tris.ToArray();
 
+		mesh.name = "GroundWallsMesh";
 		filter.sharedMesh = mesh;
 
 		MeshRenderer render = obj.AddComponent<MeshRenderer>() as MeshRenderer;
@@ -198,6 +199,7 @@ public class GroundBuilder
 		mesh.normals = norms.ToArray();
 		mesh.triangles = tris.ToArray();
 
+		mesh.name = "GroundMesh";
 		filter.sharedMesh = mesh;
 
 		MeshRenderer render = obj.AddComponent<MeshRenderer>() as MeshRenderer;

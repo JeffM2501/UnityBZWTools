@@ -11,6 +11,8 @@ namespace BZFlag.IO.Elements.Shapes
 		public float Rotation = 0;
 		public float[] Size = new float[] { 0, 0, 0 };
 
+		public List<string> Attributes = new List<string>();
+
 		public PositionableObject()
 		{
 			ObjectType = "Unknown";
@@ -38,7 +40,7 @@ namespace BZFlag.IO.Elements.Shapes
 				else if(command == "ROTATION")
 					float.TryParse(Reader.GetRestOfWords(line), out Rotation);
 				else
-					return false;
+					Attributes.Add(line);
 			}
 
 			return true;

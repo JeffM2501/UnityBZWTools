@@ -30,7 +30,7 @@ public class BZWBase : BZWBox
 	{
 		Name = b.Name;
 		SetupFromPoisitionalbe(b);
-
+		GUID = b.GUID;
 		BZFlag.IO.Elements.Shapes.Base bs = b as BZFlag.IO.Elements.Shapes.Base;
 		if(bs != null)
 			TeamColor = (BaseColors)bs.TeamColor;
@@ -42,7 +42,7 @@ public class BZWBase : BZWBox
 
 		OutputToPoisitionalbe(obj);
 		obj.TeamColor = (BZFlag.IO.Elements.Shapes.Base.TeamColors)TeamColor;
-
+		obj.GUID = GUID;
 		return obj;
 	}
 }

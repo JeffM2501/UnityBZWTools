@@ -5,6 +5,8 @@ public class BZWBasicObject : MonoBehaviour
 {
 	public string Name = string.Empty;
 
+	public string GUID = string.Empty;
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -20,6 +22,7 @@ public class BZWBasicObject : MonoBehaviour
 	public virtual void FromBZWObject(BZFlag.IO.Elements.BasicObject obj)
 	{
 		Name = obj.Name;
+		GUID = obj.GUID;
 	}
 
 	public virtual BZFlag.IO.Elements.BasicObject ToBZWObject()

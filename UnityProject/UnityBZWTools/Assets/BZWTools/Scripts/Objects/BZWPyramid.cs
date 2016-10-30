@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class BZWPyramid : BZWBasicObject
 {
 	public bool FlipZ = false;
+	public List<string> Attributes = new List<string>();
 
 	// Use this for initialization
 	void Start()
@@ -22,6 +23,8 @@ public class BZWPyramid : BZWBasicObject
 		Name = py.Name;
 		SetupFromPoisitionalbe(py);
 		FlipZ = py.FlipZ;
+		Attributes = py.Attributes;
+		GUID = py.GUID;
 	}
 
 	public override BZFlag.IO.Elements.BasicObject ToBZWObject()
@@ -30,7 +33,8 @@ public class BZWPyramid : BZWBasicObject
 
 		OutputToPoisitionalbe(obj);
 		obj.FlipZ = FlipZ;
-
+		obj.Attributes = Attributes;
+		obj.GUID = GUID;
 		return obj;
 	}
 
