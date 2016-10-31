@@ -27,6 +27,7 @@ namespace BZFlag.IO
 			AddFactory("box", typeof(Box));
 			AddFactory("pyramid", typeof(Pyramid));
 			AddFactory("base", typeof(Base));
+			AddFactory("teleporter", typeof(Teleporter));
 		}
 		 
 		public static BasicObject Create(string name)

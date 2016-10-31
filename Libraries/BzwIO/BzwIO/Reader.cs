@@ -37,6 +37,9 @@ namespace BZFlag.IO
 			List<float> vec = new List<float>();
 			foreach(string s in line.Split(" ".ToCharArray()))
 			{
+				if(s == string.Empty || Char.IsWhiteSpace(s[0]))
+					continue;
+
 				float d = 0;
 				float.TryParse(s, out d);
 				vec.Add(d);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 using BZFlag.IO.Elements;
+using BZFlag.IO.Elements.Shapes;
 
 namespace BZFlag.IO
 {
@@ -11,6 +12,11 @@ namespace BZFlag.IO
 
 		public World WorldInfo = new World();
 		public Options WorldOptions = new Options();
+
+		public void IntForLoad()
+		{
+			Teleporter.TeleporterCount = 0;
+		}
 
 		public void AddObject(BasicObject obj)
 		{
