@@ -5,8 +5,8 @@ using System.Text;
 
 namespace BZFlag.IO.Elements.Shapes
 {
-	public class Box : PositionableObject
-	{
+	public class Box : PhaseableObject
+    {
 		public Box()
 		{
 			ObjectType = "Box";

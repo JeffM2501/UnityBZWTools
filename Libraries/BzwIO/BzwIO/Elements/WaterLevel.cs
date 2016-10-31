@@ -28,13 +28,15 @@ namespace BZFlag.IO.Elements
 			return true;
 		}
 
-		public override void BuildCode()
+		public override string BuildCode()
 		{
 			Code.Clear();
 
 			AddCode(1, "Height", Height);
 			foreach(var s in Attributes)
 				AddCode(2, s, string.Empty);
+
+            return ObjectType;
 		}
 	}
 }

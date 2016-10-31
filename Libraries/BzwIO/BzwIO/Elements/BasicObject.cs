@@ -10,12 +10,12 @@ namespace BZFlag.IO.Elements
 		public virtual string ObjectTerminator {  get { return "end"; } }
 
 		public string ObjectType = string.Empty;
+        public string TypeParams = string.Empty;
 		public List<string> Code = new List<string>();
 
 		public string Name = string.Empty;
 
 		public string GUID = string.Empty;
-
 
 		private static Random RNG = new Random();
 
@@ -26,7 +26,17 @@ namespace BZFlag.IO.Elements
 			GUID = RNG.Next().ToString() + RNG.Next().ToString() + RNG.Next().ToString();
 		}
 
-		public virtual bool AddCodeLine(string command, string line)
+        public virtual void Init(string objectType, string typeParams)
+        {
+            ObjectType = objectType;
+        }
+
+        public virtual void Finish()
+        {
+
+        }
+
+        public virtual bool AddCodeLine(string command, string line)
 		{
 			Code.Add(line);
 
@@ -38,18 +48,19 @@ namespace BZFlag.IO.Elements
 			return true;
 		}
 
-		public virtual void Finish()
-		{
-
-		}
-
-		public virtual void BuildCode()
+		public virtual string BuildCode()
 		{
 			string[] code = Code.ToArray();
 			Code.Clear();
 
 			foreach(string c in code)
 				AddCode(1, c, string.Empty);
+
+            string t = ObjectType;
+            if (TypeParams != null)
+                t += " " + TypeParams;
+
+            return t;
 		}
 
 		protected StringBuilder GetIndent(int indent)

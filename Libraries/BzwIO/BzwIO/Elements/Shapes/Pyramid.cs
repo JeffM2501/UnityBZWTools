@@ -5,8 +5,8 @@ using System.Text;
 
 namespace BZFlag.IO.Elements.Shapes
 {
-	public class Pyramid : PositionableObject
-	{
+	public class Pyramid : PhaseableObject
+    {
 		public bool FlipZ = false;
 
 		public Pyramid()
@@ -37,12 +37,14 @@ namespace BZFlag.IO.Elements.Shapes
 			}
 		}
 
-		public override void BuildCode()
+		public override string BuildCode()
 		{
-			base.BuildCode();
+			string name = base.BuildCode();
 
 			if (FlipZ)
 				AddCode(1, "FlipZ", string.Empty);
+
+            return name;
 		}
 	}
 }

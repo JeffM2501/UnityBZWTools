@@ -60,12 +60,14 @@ namespace BZFlag.IO
 				if (line == string.Empty || line[0] == '#')
 					continue;
 
-				string cmd = GetFirstWord(line).ToUpperInvariant();
+                string cmd_norm = GetFirstWord(line);
+
+                string cmd = cmd_norm.ToUpperInvariant();
 
 				if (obj == null)
 				{
 					obj = ElementFactory.Create(cmd);
-					obj.ObjectType = TrimTrainingComments(line);
+                    obj.Init(cmd_norm, GetRestOfWords(TrimTrainingComments(line)));
 				}
 				else
 				{

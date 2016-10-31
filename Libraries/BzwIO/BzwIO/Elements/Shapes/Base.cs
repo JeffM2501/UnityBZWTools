@@ -37,11 +37,13 @@ namespace BZFlag.IO.Elements.Shapes
 			return true;
 		}
 
-		public override void BuildCode()
+		public override string BuildCode()
 		{
-			base.BuildCode();
+			string name = base.BuildCode();
 
 			AddCode(1, "color", (int)TeamColor);
+
+            return name;
 		}
 	}
 }

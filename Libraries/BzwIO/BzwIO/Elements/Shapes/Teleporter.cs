@@ -12,6 +12,9 @@ namespace BZFlag.IO.Elements.Shapes
 		public float Border = 0;
 		public int Index = 0;
 
+        public bool Horizontal = false;
+        public bool Ricochet = false;
+
 		public Teleporter()
 		{
 			ObjectType = "Teleporter";
@@ -20,21 +23,43 @@ namespace BZFlag.IO.Elements.Shapes
 			Index = TeleporterCount;
 		}
 
-		public override bool AddCodeLine(string command, string line)
+        public override void Init(string objectType, string typeParams)
+        {
+            ObjectType = objectType;
+
+            if (typeParams != string.Empty)
+                Name = typeParams;
+        }
+
+        public override bool AddCodeLine(string command, string line)
 		{
-			if(command == "BORDER")
-				float.TryParse(Reader.GetRestOfWords(line), out Border);
-			else if(!base.AddCodeLine(command, line))
-				return false;
+            if (command == "BORDER")
+                float.TryParse(Reader.GetRestOfWords(line), out Border);
+            else if (command == "NAME" && Name != string.Empty)
+                Name = Reader.GetRestOfWords(line);
+            else if (command == "HORIZONTAL")
+                Horizontal = true;
+            else if (command == "RICOCHET")
+                Ricochet = true;
+            else if (!base.AddCodeLine(command, line))
+                return false;
 
 			return true;
 		}
 
-		public override void BuildCode()
+		public override string BuildCode()
 		{
 			base.BuildCode();
 
 			AddCode(1, "border", Border);
+            if (Horizontal)
+                AddCode(1, "horizontal", string.Empty);
+            if (Ricochet)
+                AddCode(1, "ricochet", string.Empty);
+
+            string t = "Teleporter";
+            if (Name != string.Empty)
+                t += " " + Name;
 		}
 	}
 }

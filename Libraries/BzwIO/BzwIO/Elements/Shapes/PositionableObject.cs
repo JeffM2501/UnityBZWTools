@@ -51,7 +51,7 @@ namespace BZFlag.IO.Elements.Shapes
 
 		}
 
-		public override void BuildCode()
+		public override string BuildCode()
 		{
 			Code.Clear();
 			if(Name != string.Empty)
@@ -60,6 +60,8 @@ namespace BZFlag.IO.Elements.Shapes
 			AddCode(1, "position", Position);
 			AddCode(1, "rotation", Rotation);
 			AddCode(1, "size", Size);
+
+            return ObjectType;
 		}
 	}
 }
