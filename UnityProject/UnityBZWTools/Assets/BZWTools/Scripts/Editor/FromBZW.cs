@@ -35,6 +35,19 @@ public class FromBZW
 		opt.FromBZWObject(map.WorldOptions);
 	}
 
+	static GameObject SetupTeleporter(GameObject obj, Teleporter tp)
+	{
+		GameObject newObj = new GameObject("sides");
+		newObj.transform.SetParent(obj.transform, false);
+
+		BZWTeleporter ptr = obj.AddComponent<BZWTeleporter>() as BZWTeleporter;
+		ptr.FromBZWObject(tp);
+		TeleporterBuilder.BuildField(obj, ptr);
+		TeleporterBuilder.BuildFrame(newObj, ptr);
+
+		return obj;
+	}
+
 	static GameObject SetupPyramid(GameObject obj, Pyramid pyr)
 	{
 		BZWPyramid py = obj.AddComponent<BZWPyramid>() as BZWPyramid;
@@ -118,6 +131,12 @@ public class FromBZW
 					GameObject newObj = new GameObject(name);
 					newObj.transform.SetParent(worldObj.transform, false);
 					SetupPyramid(newObj, m as BZFlag.IO.Elements.Shapes.Pyramid);
+				}
+				else if(m as BZFlag.IO.Elements.Shapes.Teleporter != null)
+				{
+					GameObject newObj = new GameObject(name);
+					newObj.transform.SetParent(worldObj.transform, false);
+					SetupTeleporter(newObj, m as BZFlag.IO.Elements.Shapes.Teleporter);
 				}
 				else
 				{
