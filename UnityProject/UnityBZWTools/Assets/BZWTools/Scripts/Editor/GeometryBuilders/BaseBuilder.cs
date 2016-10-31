@@ -190,19 +190,19 @@ public class BaseBuilder
 		// floor
 		verts.Add(new Vector3(-1, 0, 1));
 		norms.Add(Vector3.up);
-		uvs.Add(new Vector2(-scale.x * BoxFloorUVScale, scale.z * BoxFloorUVScale));
+		uvs.Add(new Vector2(0, 1));
 
 		verts.Add(new Vector3(1, 0, 1));
 		norms.Add(Vector3.up);
-		uvs.Add(new Vector2(scale.x * BoxFloorUVScale, scale.z * BoxFloorUVScale));
+		uvs.Add(new Vector2(1, 1));
 
 		verts.Add(new Vector3(1, 0, -1));
 		norms.Add(Vector3.up);
-		uvs.Add(new Vector2(scale.x * BoxFloorUVScale, -scale.z * BoxFloorUVScale));
+		uvs.Add(new Vector2(1, 0));
 
 		verts.Add(new Vector3(-1, 0, -1));
 		norms.Add(Vector3.up);
-		uvs.Add(new Vector2(-scale.x * BoxFloorUVScale, -scale.z * BoxFloorUVScale));
+		uvs.Add(new Vector2(0, 0));
 
 		List<int> tris = new List<int>();
 
