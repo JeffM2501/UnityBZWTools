@@ -50,6 +50,7 @@ namespace BZFlag.IO
 		public static Map ReadMap(StreamReader inStream)
 		{
 			Map map = new Map();
+			map.IntForLoad();
 
 			BasicObject obj = null;
 			while (!inStream.EndOfStream)
