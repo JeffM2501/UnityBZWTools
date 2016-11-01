@@ -47,6 +47,7 @@
     <Compile Include="Elements\Shapes\PositionableObject.cs" />
     <Compile Include="Elements\Shapes\Pyramid.cs" />
     <Compile Include="Elements\Shapes\Teleporter.cs" />
+    <Compile Include="Elements\Shapes\Zone.cs" />
     <Compile Include="Elements\WaterLevel.cs" />
     <Compile Include="Elements\World.cs" />
     <Compile Include="Map.cs" />

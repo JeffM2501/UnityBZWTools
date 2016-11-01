@@ -9,7 +9,8 @@ namespace BZFlag.IO.Elements.Shapes
 	{
 		public enum TeamColors
 		{
-			Unknown = 0,
+			Unknown = -1,
+            Rogue = 0,
 			Red = 1,
 			Green = 2,
 			Blue = 3,

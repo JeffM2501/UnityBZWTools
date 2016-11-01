@@ -47,7 +47,22 @@ namespace BZFlag.IO
 			return vec;
 		}
 
-		public static Map ReadMap(StreamReader inStream)
+        internal static List<int> ParseIntVector(string line)
+        {
+            List<int> vec = new List<int>();
+            foreach (string s in line.Split(" ".ToCharArray()))
+            {
+                if (s == string.Empty || Char.IsWhiteSpace(s[0]))
+                    continue;
+
+                int i = 0;
+                int.TryParse(s, out i);
+                vec.Add(i);
+            }
+            return vec;
+        }
+
+        public static Map ReadMap(StreamReader inStream)
 		{
 			Map map = new Map();
 			map.IntForLoad();
