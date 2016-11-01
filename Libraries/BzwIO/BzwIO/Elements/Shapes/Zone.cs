@@ -14,7 +14,7 @@ namespace BZFlag.IO.Elements.Shapes
 
         public Zone()
         {
-            ObjectType = "Unknown";
+            ObjectType = "Zone";
         }
 
         protected IEnumerable<Base.TeamColors> IntListToBaseColors(IEnumerable<int> bases)
