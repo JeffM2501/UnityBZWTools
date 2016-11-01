@@ -29,36 +29,25 @@ namespace BZFlag.IO
                     continue;
 
                 if (tp.Name == string.Empty)
-                    tp.Name = tp.LinkIndex.ToString();
-            }
-
-            foreach (BasicObject obj in Objects)
-            {
-                Link l = obj as Link;
-                if (l == null)
-                    continue;
-
-                if (tp.Name == string.Empty)
-                    tp.Name = tp.GUID;
+                    tp.Name = tp.Index.ToString();
             }
         }
 
-        private void FindObjectByName(string name)
+        private BasicObject FindObjectByName(string name)
         {
             return Objects.Find((x) => x.Name.ToUpperInvariant() == name.ToUpperInvariant());
         }
 
-
-        private void FindTeleporterByName(string name)
+        private Teleporter FindTeleporterByName(string name)
         {
-            return Objects.Find((x) => x as Teleporter != null && x.Name.ToUpperInvariant() == name.ToUpperInvariant());
+            return Objects.Find((x) => x as Teleporter != null && x.Name.ToUpperInvariant() == name.ToUpperInvariant()) as Teleporter;
         }
 
-        private void FindTeleporterFaceIndex(int index)
+        private Teleporter FindTeleporterFaceIndex(int index)
         {
             int porterID = (index / 2) + 1;
 
-            return Objects.Find((x) => x as Teleporter != null && (x as Teleporter).Index == porterID);
+            return Objects.Find((x) => x as Teleporter != null && (x as Teleporter).Index == porterID) as Teleporter;
         }
 
         public void AddObject(BasicObject obj)
@@ -72,7 +61,5 @@ namespace BZFlag.IO
 				Objects.Add(obj);
 
 		}
-
-       
 	}
 }

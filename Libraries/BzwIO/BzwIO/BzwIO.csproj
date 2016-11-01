@@ -39,9 +39,11 @@
   <ItemGroup>
     <Compile Include="ElementFactory.cs" />
     <Compile Include="Elements\BasicObject.cs" />
+    <Compile Include="Elements\Link.cs" />
     <Compile Include="Elements\Options.cs" />
     <Compile Include="Elements\Shapes\Base.cs" />
     <Compile Include="Elements\Shapes\Box.cs" />
+    <Compile Include="Elements\Shapes\PhaseableObject.cs" />
     <Compile Include="Elements\Shapes\PositionableObject.cs" />
     <Compile Include="Elements\Shapes\Pyramid.cs" />
     <Compile Include="Elements\Shapes\Teleporter.cs" />

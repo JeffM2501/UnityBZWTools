@@ -32,8 +32,6 @@ public class ToBZW
 			if (opt != null)
 				map.AddObject(opt.ToBZWObject());
 		}
-
-		map.PrepForSave();
 		return map;
 	}
 

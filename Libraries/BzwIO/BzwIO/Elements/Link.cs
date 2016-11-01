@@ -22,7 +22,12 @@ namespace BZFlag.IO.Elements
                 return c == '*' || c == '?';
             }
 
-            public void Import(string code)
+			protected bool IsWildcardCharacter(string str)
+			{
+				return str != string.Empty && IsWildcardCharacter(str[0]);
+			}
+
+			public void Import(string code)
             {
                 Code = code;
 
@@ -115,7 +120,7 @@ namespace BZFlag.IO.Elements
 			return true;
 		}
 
-		public override void BuildCode()
+		public override string BuildCode()
 		{
 			Code.Clear();
 
@@ -124,6 +129,8 @@ namespace BZFlag.IO.Elements
             AddCode(1, "To", To.GetCode());
             foreach (var s in Attributes)
 				AddCode(2, s, string.Empty);
+
+			return ObjectType;
 		}
 	}
 }

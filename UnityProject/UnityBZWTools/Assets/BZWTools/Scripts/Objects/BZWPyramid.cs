@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class BZWPyramid : BZWBasicObject
+public class BZWPyramid : BZPhaseableObject
 {
 	public bool FlipZ = false;
-	public List<string> Attributes = new List<string>();
 
 	// Use this for initialization
 	void Start()
@@ -20,23 +19,14 @@ public class BZWPyramid : BZWBasicObject
 
 	public virtual void FromBZWObject(BZFlag.IO.Elements.Shapes.Pyramid py)
 	{
-		Name = py.Name;
-		SetupFromPoisitionalbe(py);
+		base.FromBZWObject(py as BZFlag.IO.Elements.Shapes.PhaseableObject);
 		FlipZ = py.FlipZ;
-		Attributes = py.Attributes;
-		GUID = py.GUID;
 	}
 
 	public override BZFlag.IO.Elements.BasicObject ToBZWObject()
 	{
-		var obj = new BZFlag.IO.Elements.Shapes.Pyramid();
-
-		OutputToPoisitionalbe(obj);
+		var obj = OutputToPhaseable(new BZFlag.IO.Elements.Shapes.Pyramid()) as BZFlag.IO.Elements.Shapes.Pyramid;
 		obj.FlipZ = FlipZ;
-		obj.Attributes = Attributes;
-		obj.GUID = GUID;
 		return obj;
 	}
-
-
 }

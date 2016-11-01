@@ -60,6 +60,8 @@ namespace BZFlag.IO.Elements.Shapes
             string t = "Teleporter";
             if (Name != string.Empty)
                 t += " " + Name;
+
+			return t;
 		}
 	}
 }

@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class BZWBox : BZWBasicObject
+public class BZWBox : BZPhaseableObject
 {
-	public List<string> Attributes = new List<string>();
-
 	// Use this for initialization
 	void Start ()
 	{
@@ -19,20 +17,12 @@ public class BZWBox : BZWBasicObject
 
 	public virtual void FromBZWObject(BZFlag.IO.Elements.Shapes.Box box)
 	{
-		Name = box.Name;
-		SetupFromPoisitionalbe(box);
-		Attributes = box.Attributes;
-		GUID = box.GUID;
+		base.FromBZWObject(box as BZFlag.IO.Elements.Shapes.PhaseableObject);
 	}
 
 	public override BZFlag.IO.Elements.BasicObject ToBZWObject()
 	{
-		var obj = new BZFlag.IO.Elements.Shapes.Box();
-
-		OutputToPoisitionalbe(obj);
-		obj.Attributes = Attributes;
-		obj.GUID = GUID;
-
+		var obj =  OutputToPhaseable(new BZFlag.IO.Elements.Shapes.Box());
 		return obj;
 	}
 }

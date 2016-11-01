@@ -5,6 +5,7 @@ using System.IO;
 using System;
 
 using BZFlag.IO;
+using BZFlag.IO.Elements;
 using BZFlag.IO.Elements.Shapes;
 
 public class FromBZW
@@ -33,6 +34,12 @@ public class FromBZW
 		BZWOptions opt = optionsObject.GetComponent<BZWOptions>();
 		optionsObject.transform.SetParent(worldObj.transform, false);
 		opt.FromBZWObject(map.WorldOptions);
+	}
+	static GameObject SetupLink(GameObject obj, Link link)
+	{
+		BZLink ptr = obj.AddComponent<BZLink>() as BZLink;
+		ptr.FromBZWObject(link);
+		return obj;
 	}
 
 	static GameObject SetupTeleporter(GameObject obj, Teleporter tp)
@@ -137,6 +144,12 @@ public class FromBZW
 					GameObject newObj = new GameObject(name);
 					newObj.transform.SetParent(worldObj.transform, false);
 					SetupTeleporter(newObj, m as BZFlag.IO.Elements.Shapes.Teleporter);
+				}
+				else if(m as BZFlag.IO.Elements.Link != null)
+				{
+					GameObject newObj = new GameObject(name);
+					newObj.transform.SetParent(worldObj.transform, false);
+					SetupLink(newObj, m as BZFlag.IO.Elements.Link);
 				}
 				else
 				{

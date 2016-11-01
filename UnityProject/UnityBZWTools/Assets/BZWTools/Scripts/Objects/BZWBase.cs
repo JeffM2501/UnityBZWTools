@@ -28,9 +28,8 @@ public class BZWBase : BZWBox
 
 	public override void FromBZWObject(BZFlag.IO.Elements.Shapes.Box b)
 	{
-		Name = b.Name;
-		SetupFromPoisitionalbe(b);
-		GUID = b.GUID;
+		base.FromBZWObject(b);
+
 		BZFlag.IO.Elements.Shapes.Base bs = b as BZFlag.IO.Elements.Shapes.Base;
 		if(bs != null)
 			TeamColor = (BaseColors)bs.TeamColor;
@@ -38,11 +37,8 @@ public class BZWBase : BZWBox
 
 	public override BZFlag.IO.Elements.BasicObject ToBZWObject()
 	{
-		var obj = new BZFlag.IO.Elements.Shapes.Base();
-
-		OutputToPoisitionalbe(obj);
+		var obj = OutputToPhaseable(new BZFlag.IO.Elements.Shapes.Base()) as BZFlag.IO.Elements.Shapes.Base;
 		obj.TeamColor = (BZFlag.IO.Elements.Shapes.Base.TeamColors)TeamColor;
-		obj.GUID = GUID;
 		return obj;
 	}
 }
