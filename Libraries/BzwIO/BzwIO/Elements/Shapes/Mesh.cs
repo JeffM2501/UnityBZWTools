@@ -8,13 +8,27 @@ namespace BZFlag.IO.Elements.Shapes
 {
     public class Mesh : PhaseableObject
     {
-        
         public List<Vector3F> InsidePoints = new List<Vector3F>();
         public List<Vector3F> OutsidePoints = new List<Vector3F>();
 
         public List<Vector3F> Vertecies = new List<Vector3F>();
         public List<Vector3F> Normals = new List<Vector3F>();
         public List<Vector2F> UVs = new List<Vector2F>();
+
+        public class Transformations
+        {
+            public enum TransformTypes
+            {
+                Scale,
+                Shift,
+                Shear,
+                Spin,
+            }
+            public TransformTypes Transform = TransformTypes.Shift;
+            public Vector4F Value = new Vector4F();
+        }
+
+        public List<Transformations> Transforms = new List<Transformations>();
 
 
         public Mesh()

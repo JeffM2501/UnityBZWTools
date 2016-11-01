@@ -50,6 +50,35 @@ namespace BZFlag.IO.Types
             return ((IEnumerable<float>)Pos).GetEnumerator();
         }
 
+        public Vector3F() { }
+
+        public Vector3F(float x, float y, float z)
+        {
+            Pos[0] = x;
+            Pos[1] = y;
+            Pos[2] = z;
+        }
+
+        public Vector3F(float[] v, int start = 0)
+        {
+            Pos[0] = v[start];
+            Pos[1] = v[start+1];
+            Pos[2] = v[start+2];
+        }
+
+        public Vector3F(Vector2F v)
+        {
+            Pos[0] = v.X;
+            Pos[1] = v.Y;
+        }
+
+        public Vector3F(Vector4F v)
+        {
+            Pos[0] = v.X;
+            Pos[1] = v.Y;
+            Pos[2] = v.Z;
+        }
+
         public static Vector3F Read(string line)
         {
             Vector3F v = new Vector3F();

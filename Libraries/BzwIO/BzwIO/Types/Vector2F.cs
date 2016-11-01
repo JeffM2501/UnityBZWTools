@@ -44,6 +44,32 @@ namespace BZFlag.IO.Types
             return ((IEnumerable<float>)Pos).GetEnumerator();
         }
 
+        public Vector2F() { }
+
+        public Vector2F(float x, float y)
+        {
+            Pos[0] = x;
+            Pos[1] = y;
+        }
+
+        public Vector2F(float[] v, int start = 0)
+        {
+            Pos[0] = v[start];
+            Pos[1] = v[start + 1];
+        }
+
+        public Vector2F(Vector3F v)
+        {
+            Pos[0] = v.X;
+            Pos[1] = v.Y;
+        }
+
+        public Vector2F(Vector4F v)
+        {
+            Pos[0] = v.X;
+            Pos[1] = v.Y;
+        }
+
         public static Vector2F ReadVector3(string line)
         {
             Vector2F v = new Vector2F();
