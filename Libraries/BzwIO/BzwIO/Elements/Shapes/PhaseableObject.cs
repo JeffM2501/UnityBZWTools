@@ -5,17 +5,12 @@ using System.Text;
 
 namespace BZFlag.IO.Elements.Shapes
 {
-	public class PhaseableObject : PositionableObject
+	public abstract class PhaseableObject : PositionableObject
     {
         public bool Passable = false;
         public bool ShootThrough = false;
         public bool DriveThrough = false;
         public bool Ricochet = false;
-
-		public PhaseableObject()
-		{
-			ObjectType = "Unknown";
-		}
 
 		public override bool AddCodeLine(string command, string line)
 		{

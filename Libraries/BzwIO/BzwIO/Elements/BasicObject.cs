@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BZFlag.IO.Types;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -107,5 +108,25 @@ namespace BZFlag.IO.Elements
 
 			AddCode(indent, name, sb.ToString());
 		}
-	}
+
+        public void AddCode(int indent, string name, Vector3F value)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(value.X.ToString());
+            sb.Append(" ");
+            sb.Append(value.Y.ToString());
+            sb.Append(" ");
+            sb.Append(value.Z.ToString());
+            AddCode(indent, name, sb.ToString());
+        }
+
+        public void AddCode(int indent, string name, Vector2F value)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(value.X.ToString());
+            sb.Append(" ");
+            sb.Append(value.Y.ToString());
+            AddCode(indent, name, sb.ToString());
+        }
+    }
 }

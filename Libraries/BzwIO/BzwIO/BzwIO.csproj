@@ -43,6 +43,7 @@
     <Compile Include="Elements\Options.cs" />
     <Compile Include="Elements\Shapes\Base.cs" />
     <Compile Include="Elements\Shapes\Box.cs" />
+    <Compile Include="Elements\Shapes\Mesh.cs" />
     <Compile Include="Elements\Shapes\PhaseableObject.cs" />
     <Compile Include="Elements\Shapes\PositionableObject.cs" />
     <Compile Include="Elements\Shapes\Pyramid.cs" />
@@ -53,6 +54,8 @@
     <Compile Include="Map.cs" />
     <Compile Include="Reader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Types\Vector2F.cs" />
+    <Compile Include="Types\Vector3F.cs" />
     <Compile Include="Writer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
