@@ -24,7 +24,7 @@ namespace ReaderTest
 			var map = Reader.ReadMap(sr);
 			sr.Close();
 
-			FileInfo newFile = new FileInfo(file.FullName + "_saved");
+			FileInfo newFile = new FileInfo(file.FullName + "_Parsed");
 
 			if(newFile.Exists)
 				newFile.Delete();
