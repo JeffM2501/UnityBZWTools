@@ -54,6 +54,7 @@
     <Compile Include="Map.cs" />
     <Compile Include="Reader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Types\Utilities.cs" />
     <Compile Include="Types\Vector2F.cs" />
     <Compile Include="Types\Vector3F.cs" />
     <Compile Include="Types\Vector4f.cs" />

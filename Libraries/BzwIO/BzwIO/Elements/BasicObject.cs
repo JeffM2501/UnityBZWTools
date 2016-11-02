@@ -109,6 +109,19 @@ namespace BZFlag.IO.Elements
 			AddCode(indent, name, sb.ToString());
 		}
 
+        public void AddCode(int indent, string name, Vector4F value)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(value.A.ToString());
+            sb.Append(" ");
+            sb.Append(value.X.ToString());
+            sb.Append(" ");
+            sb.Append(value.Y.ToString());
+            sb.Append(" ");
+            sb.Append(value.Z.ToString());
+            AddCode(indent, name, sb.ToString());
+        }
+
         public void AddCode(int indent, string name, Vector3F value)
         {
             StringBuilder sb = new StringBuilder();

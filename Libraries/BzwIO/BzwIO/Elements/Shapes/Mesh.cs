@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using BZFlag.IO.Types;
+
 namespace BZFlag.IO.Elements.Shapes
 {
-    public class Mesh : PhaseableObject
+    public class Mesh : PositionableObject
     {
         public List<Vector3F> InsidePoints = new List<Vector3F>();
         public List<Vector3F> OutsidePoints = new List<Vector3F>();
@@ -77,6 +79,8 @@ namespace BZFlag.IO.Elements.Shapes
         public bool SmoothBounce = false;
         public bool NoClusters = false;
 
+        private Face TempFace = null;
+
         public Mesh()
         {
             ObjectType = "Mesh";
@@ -98,25 +102,147 @@ namespace BZFlag.IO.Elements.Shapes
                 OutsidePoints.Add(Vector3F.Read(nub));
             else if (command == "SHIFT" || command == "SPIN" || command == "SCALE" || command == "SHEAR")
                 Transforms.Add(new Transformation(command,nub));
+            else if (command == "FACE")
+            {
+                if (TempFace != null)
+                    Faces.Add(TempFace);
+
+                TempFace = new Face();
+            }
+            else if (command == "ENDFACE")
+            {
+                if (TempFace != null)
+                    Faces.Add(TempFace);
+
+                TempFace = null;
+            }
             else if (command == "PHYDRV")
-                OutsidePoints.Add(Vector3F.Read(nub));
+            {
+                if (TempFace != null)
+                    TempFace.PhysicsDriver = nub;
+                else
+                    PhysicsDriver = nub;
+            }
             else if (command == "NOCLOSTERS")
-                OutsidePoints.Add(Vector3F.Read(nub));
+            {
+                if (TempFace != null)
+                    TempFace.NoClusters = true;
+                else
+                    NoClusters = true;
+            }
             else if (command == "SMOOTHBOUNCE")
-                OutsidePoints.Add(Vector3F.Read(nub));
+            {
+                if (TempFace != null)
+                    TempFace.SmoothBounce = true;
+                else
+                    SmoothBounce = true;
+            }
+            else if (command == "PASSABLE")
+            {
+                if (TempFace != null)
+                    TempFace.Passable = true;
+            }
+            else if (command == "DRIVETHROUGH")
+            {
+                if (TempFace != null)
+                    TempFace.DriveThrough = true;
+            }
+            else if (command == "SHOOTTHROUGH")
+            {
+                if (TempFace != null)
+                    TempFace.ShootThrough = true;
+            }
             else if (!base.AddCodeLine(command, line))
                 return false;
 
             return true;
         }
 
+        public override void Finish()
+        {
+            if (TempFace != null)
+                Faces.Add(TempFace);
+
+            TempFace.ToString();
+            base.Finish();
+        }
+
         public override string BuildCode()
         {
             string name = base.BuildCode();
 
-           //     AddCode(1, "FlipZ", string.Empty);
+            foreach (var p in InsidePoints)
+                AddCode(1, "inside", p);
 
-            return name;
+            foreach (var p in OutsidePoints)
+                AddCode(1, "outside", p);
+
+            foreach (var p in Vertecies)
+                AddCode(1, "vertex", p);
+            foreach (var p in Normals)
+                AddCode(1, "normal", p);
+            foreach (var p in UVs)
+                AddCode(1, "texcoord", p);
+
+            foreach (var xform in Transforms)
+            {
+                switch (xform.TransformType)
+                {
+                    case Transformation.TransformTypes.Scale:
+                        AddCode(1, "scale", new Vector3F(xform.Value));
+                        break;
+                    case Transformation.TransformTypes.Shear:
+                        AddCode(1, "shear", new Vector3F(xform.Value));
+                        break;
+                    case Transformation.TransformTypes.Shift:
+                        AddCode(1, "shift", new Vector3F(xform.Value));
+                        break;
+                    case Transformation.TransformTypes.Spin:
+                        AddCode(1, "spin", xform.Value);
+                        break;
+                }
+            }
+
+            if (PhysicsDriver != string.Empty)
+                AddCode(1, "phydrv", PhysicsDriver);
+
+            if (NoClusters)
+                AddCode(1, "noclusters", string.Empty);
+
+            if (SmoothBounce)
+                AddCode(1, "smoothbounce", string.Empty);
+
+            foreach(var face in Faces)
+            {
+                AddCode(1, "face", string.Empty);
+
+                AddCode(2, "vertices", string.Join(" ",Utilities.GetStringList<int>(face.Vertecies)));
+                AddCode(2, "normals", string.Join(" ", Utilities.GetStringList<int>(face.Normals)));
+                AddCode(2, "texcoords", string.Join(" ", Utilities.GetStringList<int>(face.UVs)));
+
+                if (face.PhysicsDriver != string.Empty)
+                    AddCode(2, "phydrv", PhysicsDriver);
+
+                if (face.NoClusters)
+                    AddCode(2, "noclusters", string.Empty);
+
+                if (face.SmoothBounce)
+                    AddCode(2, "smoothbounce", string.Empty);
+
+                if (face.Passable)
+                    AddCode(2, "passable", string.Empty);
+                else
+                {
+                    if (face.ShootThrough)
+                        AddCode(2, "shootthrough", string.Empty);
+                    if (face.DriveThrough)
+                        AddCode(2, "drivethrough", string.Empty);
+                }
+
+                AddCode(1, "endface", string.Empty);
+            }
+
+           return name;
         }
     }
 }

@@ -33,15 +33,6 @@ namespace BZFlag.IO.Elements.Shapes
             return teams;
         }
 
-        protected string[] GetStringList<T>(IEnumerable<T> inList)
-        {
-            List<string> outList = new List<string>();
-            foreach (var o in inList)
-                outList.Add(o.ToString());
-
-            return outList.ToArray();
-        }
-
         public override bool AddCodeLine(string command, string line)
         {
             string nubs = Reader.GetRestOfWords(line);
@@ -78,9 +69,9 @@ namespace BZFlag.IO.Elements.Shapes
                 AddCode(1, "flag", f);
 
             if (Safe.Count > 0)
-                AddCode(1, "safe", string.Join(" ", GetStringList<int>(BaseColorListToInts(Safe))));
+                AddCode(1, "safe", string.Join(" ", BZFlag.IO.Types.Utilities.GetStringList<int>(BaseColorListToInts(Safe))));
             if (Team.Count > 0)
-                AddCode(1, "team", string.Join(" ", GetStringList<int>(BaseColorListToInts(Team))));
+                AddCode(1, "team", string.Join(" ", BZFlag.IO.Types.Utilities.GetStringList<int>(BaseColorListToInts(Team))));
 
             return name;
         }
