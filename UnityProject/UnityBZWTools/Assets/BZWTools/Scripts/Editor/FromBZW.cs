@@ -65,6 +65,10 @@ public class FromBZW
 		SetupRootObject(worldObj, map);
 		return worldObj;
 	}
+    public static GameObject GetZonePrefab()
+    {
+        return (GameObject)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/BZWTools/Prefabs/Meshes/Zone", typeof(GameObject)));
+    }
 
 	public static void ReadUserBZW(string path)
 	{
@@ -98,7 +102,7 @@ public class FromBZW
                 else if(m as BZFlag.IO.Elements.Link != null)
                     NewMapObject<BZWLink>(m);
                 else if (m as BZFlag.IO.Elements.Shapes.Zone != null)
-                    AddMapObject<BZWZone>((GameObject)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/BZWTools/Prefabs/Meshes/Zone", typeof(GameObject))), m);
+                    AddMapObject<BZWZone>(GetZonePrefab(), m);
                 else
                     NewMapObject<BZWUnknown>(m);
 				count++;
