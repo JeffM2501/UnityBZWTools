@@ -106,7 +106,7 @@ namespace BZFlag.IO.Types
 
         public static Vector4F Read(string line)
         {
-            Vector3F v = new Vector3F();
+            Vector4F v = new Vector4F();
 
             var vec = Reader.ParseFloatVector(line);
             for (int i = 0; i < 4 && i < vec.Count; i++)

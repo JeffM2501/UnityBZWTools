@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class BZWPyramid : BZPhaseableObject
+public class BZWPyramid : BZWPhaseableObject
 {
 	public bool FlipZ = false;
 

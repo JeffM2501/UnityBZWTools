@@ -5,8 +5,10 @@ using System.Text;
 
 namespace BZFlag.IO.Elements.Shapes
 {
-	public class Base : Box
+    [Serializable]
+    public class Base : Box
 	{
+        [Serializable]
 		public enum TeamColors
 		{
 			Unknown = -1,

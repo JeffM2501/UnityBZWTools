@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class BZPhaseableObject : BZWBasicObject
+public class BZWPhaseableObject : BZWBasicObject
 {
 	public bool Passable = false;
 	public bool DriveThrough = false;
@@ -38,8 +38,4 @@ public class BZPhaseableObject : BZWBasicObject
 		return obj;
 	}
 
-	public override BZFlag.IO.Elements.BasicObject ToBZWObject()
-	{
-		return OutputToPhaseable(new BZFlag.IO.Elements.Shapes.PhaseableObject());
-	}
 }

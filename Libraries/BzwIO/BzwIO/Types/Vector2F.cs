@@ -70,7 +70,7 @@ namespace BZFlag.IO.Types
             Pos[1] = v.Y;
         }
 
-        public static Vector2F ReadVector3(string line)
+        public static Vector2F Read(string line)
         {
             Vector2F v = new Vector2F();
 

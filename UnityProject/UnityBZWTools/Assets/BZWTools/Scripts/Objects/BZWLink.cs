@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 
 
-public class BZLink : BZWBasicObject
+public class BZWLink : BZWBasicObject
 {
 	[Serializable]
 	public class LinkDestination

@@ -183,7 +183,7 @@ public class BaseBuilder
 		List<Vector3> norms = new List<Vector3>();
 		List<Vector2> uvs = new List<Vector2>();
 
-		Vector3 scale = b.transform.localScale;
+		//Vector3 scale = b.transform.localScale;
 
 		int offset = 0;
 

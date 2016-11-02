@@ -8,6 +8,8 @@ using BZFlag.IO;
 using BZFlag.IO.Elements;
 using BZFlag.IO.Elements.Shapes;
 
+using System.Collections.Generic;
+
 public class FromBZW
 {
 
@@ -35,9 +37,17 @@ public class FromBZW
 		optionsObject.transform.SetParent(worldObj.transform, false);
 		opt.FromBZWObject(map.WorldOptions);
 	}
+
+    static GameObject SetupZone(GameObject obj, Zone zone)
+    {
+        BZWZone ptr = obj.AddComponent<BZWZone>() as BZWZone;
+        ptr.FromBZWObject(zone);
+        return obj;
+    }
+
 	static GameObject SetupLink(GameObject obj, Link link)
 	{
-		BZLink ptr = obj.AddComponent<BZLink>() as BZLink;
+		BZWLink ptr = obj.AddComponent<BZWLink>() as BZWLink;
 		ptr.FromBZWObject(link);
 		return obj;
 	}
@@ -151,7 +161,13 @@ public class FromBZW
 					newObj.transform.SetParent(worldObj.transform, false);
 					SetupLink(newObj, m as BZFlag.IO.Elements.Link);
 				}
-				else
+                else if (m as BZFlag.IO.Elements.Shapes.Zone != null)
+                {
+                    GameObject newObj = (GameObject)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/BZWTools/Prefabs/Meshes/Zone",typeof(GameObject)));
+                    newObj.transform.SetParent(worldObj.transform, false);
+                    SetupZone(newObj, m as BZFlag.IO.Elements.Shapes.Zone);
+                }
+                else
 				{
 					GameObject newObj = new GameObject(name);
 					newObj.AddComponent<BZWUnknown>();

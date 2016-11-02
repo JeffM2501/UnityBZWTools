@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class BZWBox : BZPhaseableObject
+public class BZWBox : BZWPhaseableObject
 {
 	// Use this for initialization
 	void Start ()
