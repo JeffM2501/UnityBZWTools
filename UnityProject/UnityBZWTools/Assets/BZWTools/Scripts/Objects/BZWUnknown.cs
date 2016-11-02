@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System;
+using BZFlag.IO.Elements;
 
 public class BZWUnknown : BZWBasicObject
 {
@@ -21,7 +22,7 @@ public class BZWUnknown : BZWBasicObject
 	
 	}
 
-	public override void FromBZWObject(BZFlag.IO.Elements.BasicObject obj)
+	public override void FromBZWObject(BasicObject obj)
 	{
 		ObjectType = obj.ObjectType;
 		Name = obj.Name;
@@ -39,4 +40,10 @@ public class BZWUnknown : BZWBasicObject
 
 		return obj;
 	}
+
+    public override void Setup(BasicObject elementObject)
+    {
+        FromBZWObject(elementObject);
+        BuildGeometry();
+    }
 }

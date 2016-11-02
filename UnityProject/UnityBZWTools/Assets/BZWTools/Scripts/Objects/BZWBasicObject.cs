@@ -51,4 +51,15 @@ public class BZWBasicObject : MonoBehaviour
 		p.Size[2] = this.transform.localScale.y;
 		p.Size[1] = this.transform.localScale.z;
 	}
+
+    public virtual void Setup(BZFlag.IO.Elements.BasicObject elementObject)
+    {
+        FromBZWObject(elementObject);
+        BuildGeometry();
+    }
+
+    public virtual void BuildGeometry()
+    {
+
+    }
 }

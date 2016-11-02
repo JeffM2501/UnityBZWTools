@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections.Generic;
-
+using BZFlag.IO.Elements;
 
 public class BZWLink : BZWBasicObject
 {
@@ -80,4 +80,9 @@ public class BZWLink : BZWBasicObject
 
 		return link;
 	}
+
+    public override void Setup(BasicObject elementObject)
+    {
+        FromBZWObject(elementObject as Link);
+    }
 }

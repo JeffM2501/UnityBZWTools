@@ -99,13 +99,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\BZWTools\Scripts\Editor\BZWToolsWindow.cs" />
     <Compile Include="Assets\BZWTools\Scripts\Editor\ExportTools.cs" />
     <Compile Include="Assets\BZWTools\Scripts\Editor\FromBZW.cs" />
-    <Compile Include="Assets\BZWTools\Scripts\Editor\GeometryBuilders\BaseBuilder.cs" />
-    <Compile Include="Assets\BZWTools\Scripts\Editor\GeometryBuilders\BoxBuilder.cs" />
-    <Compile Include="Assets\BZWTools\Scripts\Editor\GeometryBuilders\GroundBuilder.cs" />
-    <Compile Include="Assets\BZWTools\Scripts\Editor\GeometryBuilders\PyramidBuilder.cs" />
-    <Compile Include="Assets\BZWTools\Scripts\Editor\GeometryBuilders\TeleporterBuilder.cs" />
     <Compile Include="Assets\BZWTools\Scripts\Editor\IOMenus.cs" />
     <Compile Include="Assets\BZWTools\Scripts\Editor\ToBZW.cs" />
   </ItemGroup>

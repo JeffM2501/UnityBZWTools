@@ -30,6 +30,8 @@ namespace BZFlag.IO
 			AddFactory("teleporter", typeof(Teleporter));
             AddFactory("link", typeof(Link));
             AddFactory("zone", typeof(Zone));
+            AddFactory("mesh", typeof(Mesh));
+            AddFactory("physics", typeof(Physics));
         }
 		 
 		public static BasicObject Create(string name)

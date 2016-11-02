@@ -41,6 +41,7 @@
     <Compile Include="Elements\BasicObject.cs" />
     <Compile Include="Elements\Link.cs" />
     <Compile Include="Elements\Options.cs" />
+    <Compile Include="Elements\Physics.cs" />
     <Compile Include="Elements\Shapes\Base.cs" />
     <Compile Include="Elements\Shapes\Box.cs" />
     <Compile Include="Elements\Shapes\Mesh.cs" />

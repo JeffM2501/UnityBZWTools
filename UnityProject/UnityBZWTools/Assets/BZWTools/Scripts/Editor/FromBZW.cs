@@ -13,94 +13,50 @@ using System.Collections.Generic;
 public class FromBZW
 {
 
-	static void SetupRootObject(GameObject worldObj, Map map)
+    public static void SetupRootObject(GameObject worldObj, Map map)
 	{
-		worldObj.AddComponent<BZWWorld>();
-		BZWWorld mapRoot = worldObj.GetComponent<BZWWorld>();
-		mapRoot.FromBZWObject(map.WorldInfo);
+        BZWWorld mapRoot = worldObj.AddComponent<BZWWorld>();
+        mapRoot.Setup(map.WorldInfo);
 
-		GameObject grass = new GameObject("_Grass");
-		grass.transform.SetParent(worldObj.transform, false);
-		GroundBuilder.BuildGrass(grass, mapRoot);
-
-		if(!map.WorldInfo.NoWalls)
-		{
-			GameObject walls = new GameObject("_Walls");
-			walls.transform.SetParent(grass.transform, false);
-			GroundBuilder.BuildWalls(walls, mapRoot);
-		}
-
-		// add map options
-		GameObject optionsObject = new GameObject("Options");
-		optionsObject.AddComponent<BZWOptions>();
-		BZWOptions opt = optionsObject.GetComponent<BZWOptions>();
-		optionsObject.transform.SetParent(worldObj.transform, false);
-		opt.FromBZWObject(map.WorldOptions);
+        // add map options
+        GameObject optionsObject = AddToRoot(worldObj ,new GameObject("Options"));
+        optionsObject.AddComponent<BZWOptions>().Setup(map.WorldOptions);
 	}
 
-    static GameObject SetupZone(GameObject obj, Zone zone)
+    public static GameObject AddToRoot(GameObject mapRoot, GameObject obj)
     {
-        BZWZone ptr = obj.AddComponent<BZWZone>() as BZWZone;
-        ptr.FromBZWObject(zone);
+        obj.transform.SetParent(mapRoot.transform, false);
         return obj;
     }
 
-	static GameObject SetupLink(GameObject obj, Link link)
-	{
-		BZWLink ptr = obj.AddComponent<BZWLink>() as BZWLink;
-		ptr.FromBZWObject(link);
-		return obj;
-	}
+    public static GameObject NewMapObject(GameObject obj)
+    {
+        AddToRoot(BZWToolsWindow.GetRoot(), obj);
+        return obj;
+    }
 
-	static GameObject SetupTeleporter(GameObject obj, Teleporter tp)
-	{
-		GameObject newObj = new GameObject("sides");
-		newObj.transform.SetParent(obj.transform, false);
+    public static GameObject NewMapObject<T>(BZFlag.IO.Elements.BasicObject obj) where T : BZWBasicObject
+    {
+        string name = obj.Name;
+        if (name == string.Empty)
+            name = obj.ObjectType + "_" + obj.GUID;
 
-		BZWTeleporter ptr = obj.AddComponent<BZWTeleporter>() as BZWTeleporter;
-		ptr.FromBZWObject(tp);
-		TeleporterBuilder.BuildField(obj, ptr);
-		TeleporterBuilder.BuildFrame(newObj, ptr);
+        var gb = new GameObject(name);
+        AddToRoot(BZWToolsWindow.GetRoot(), gb);
+        T bzw = gb.AddComponent<T>();
+        bzw.Setup(obj);
 
-		return obj;
-	}
+        return gb;
+    }
 
-	static GameObject SetupPyramid(GameObject obj, Pyramid pyr)
-	{
-		BZWPyramid py = obj.AddComponent<BZWPyramid>() as BZWPyramid;
-		py.FromBZWObject(pyr);
-		PyramidBuilder.Build(obj, py);
+    public static GameObject AddMapObject<T>(GameObject gb, BZFlag.IO.Elements.BasicObject obj) where T : BZWBasicObject
+    {
+        AddToRoot(BZWToolsWindow.GetRoot(), gb);
+        T bzw = gb.AddComponent<T>();
+        bzw.Setup(obj);
 
-		return obj;
-	}
-
-	static GameObject SetupBox(GameObject obj, Box box)
-	{
-		GameObject newObj = new GameObject("walls");
-		newObj.transform.SetParent(obj.transform, false);
-
-		BZWBox bx = obj.AddComponent<BZWBox>() as BZWBox;
-		bx.FromBZWObject(box);
-
-		BoxBuilder.BuildRoof(obj, bx);
-		BoxBuilder.BuildWalls(newObj, bx);
-
-		return obj;
-	}
-
-	static GameObject SetupBase(GameObject obj, Base b)
-	{
-		GameObject newObj = new GameObject("walls");
-		newObj.transform.SetParent(obj.transform, false);
-
-		BZWBase bx = obj.AddComponent<BZWBase>() as BZWBase;
-		bx.FromBZWObject(b);
-
-		BaseBuilder.BuildRoof(obj, bx);
-		BaseBuilder.BuildWalls(newObj, bx);
-
-		return obj;
-	}
+        return gb;
+    }
 
 	public static GameObject CreateNewBZWRoot(Map map)
 	{
@@ -132,49 +88,19 @@ public class FromBZW
 					name = m.ObjectType + "_" + count.ToString();
 
 				if(m as BZFlag.IO.Elements.Shapes.Base != null)
-				{
-					GameObject newObj = new GameObject(name);
-					newObj.transform.SetParent(worldObj.transform, false);
-					SetupBase(newObj, m as BZFlag.IO.Elements.Shapes.Base);
-				}
-				else if(m as BZFlag.IO.Elements.Shapes.Box != null)
-				{
-					GameObject newObj = new GameObject(name);
-					newObj.transform.SetParent(worldObj.transform, false);
-					SetupBox(newObj, m as BZFlag.IO.Elements.Shapes.Box);
-				}
-				else if(m as BZFlag.IO.Elements.Shapes.Pyramid != null)
-				{
-					GameObject newObj = new GameObject(name);
-					newObj.transform.SetParent(worldObj.transform, false);
-					SetupPyramid(newObj, m as BZFlag.IO.Elements.Shapes.Pyramid);
-				}
-				else if(m as BZFlag.IO.Elements.Shapes.Teleporter != null)
-				{
-					GameObject newObj = new GameObject(name);
-					newObj.transform.SetParent(worldObj.transform, false);
-					SetupTeleporter(newObj, m as BZFlag.IO.Elements.Shapes.Teleporter);
-				}
-				else if(m as BZFlag.IO.Elements.Link != null)
-				{
-					GameObject newObj = new GameObject(name);
-					newObj.transform.SetParent(worldObj.transform, false);
-					SetupLink(newObj, m as BZFlag.IO.Elements.Link);
-				}
+                    NewMapObject<BZWBase>(m);
+                else if(m as BZFlag.IO.Elements.Shapes.Box != null)
+                    NewMapObject<BZWBox>(m);
+                else if(m as BZFlag.IO.Elements.Shapes.Pyramid != null)
+                    NewMapObject<BZWPyramid>(m);
+                else if(m as BZFlag.IO.Elements.Shapes.Teleporter != null)
+                    NewMapObject<BZWTeleporter>(m);
+                else if(m as BZFlag.IO.Elements.Link != null)
+                    NewMapObject<BZWLink>(m);
                 else if (m as BZFlag.IO.Elements.Shapes.Zone != null)
-                {
-                    GameObject newObj = (GameObject)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/BZWTools/Prefabs/Meshes/Zone",typeof(GameObject)));
-                    newObj.transform.SetParent(worldObj.transform, false);
-                    SetupZone(newObj, m as BZFlag.IO.Elements.Shapes.Zone);
-                }
+                    AddMapObject<BZWZone>((GameObject)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/BZWTools/Prefabs/Meshes/Zone", typeof(GameObject))), m);
                 else
-				{
-					GameObject newObj = new GameObject(name);
-					newObj.AddComponent<BZWUnknown>();
-					BZWUnknown unk = newObj.GetComponent<BZWUnknown>();
-					newObj.transform.SetParent(worldObj.transform, false);
-					unk.FromBZWObject(m);
-				}
+                    NewMapObject<BZWUnknown>(m);
 				count++;
 			}
 

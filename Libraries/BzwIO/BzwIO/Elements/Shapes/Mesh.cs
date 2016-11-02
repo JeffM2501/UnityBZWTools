@@ -1,5 +1,4 @@
-﻿using BZFlag.IO.Types;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -88,6 +87,8 @@ namespace BZFlag.IO.Elements.Shapes
 
         public override bool AddCodeLine(string command, string line)
         {
+            Code.Add(line);// save the raw data
+
             string nub = Reader.GetRestOfWords(line);
 
             if (command == "VERTEX")

@@ -79,6 +79,11 @@ namespace BZFlag.IO.Types
             Pos[2] = v.Z;
         }
 
+        public bool IsZero ()
+        {
+            return Pos[0] == 0.0f && Pos[1] == 0.0f && Pos[2] == 0.0f;
+        }
+
         public static Vector3F Read(string line)
         {
             Vector3F v = new Vector3F();

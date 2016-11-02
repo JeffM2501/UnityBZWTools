@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using BZFlag.IO.Elements;
+using BZFlag.IO.Elements.Shapes;
 
 public class BZWBox : BZWPhaseableObject
 {
@@ -15,14 +17,39 @@ public class BZWBox : BZWPhaseableObject
 	
 	}
 
-	public virtual void FromBZWObject(BZFlag.IO.Elements.Shapes.Box box)
+	public virtual void FromBZWObject(Box box)
 	{
-		base.FromBZWObject(box as BZFlag.IO.Elements.Shapes.PhaseableObject);
+		base.FromBZWObject(box as PhaseableObject);
 	}
 
-	public override BZFlag.IO.Elements.BasicObject ToBZWObject()
+	public override BasicObject ToBZWObject()
 	{
-		var obj =  OutputToPhaseable(new BZFlag.IO.Elements.Shapes.Box());
+		var obj =  OutputToPhaseable(new Box());
 		return obj;
 	}
+
+    public override void Setup(BasicObject elementObject)
+    {
+        FromBZWObject(elementObject as Box);
+        BuildGeometry();
+    }
+
+    public override void BuildGeometry()
+    {
+        List<GameObject> toKill = new List<GameObject>();
+        foreach (Transform c in transform)
+        {
+            if (c.gameObject.name == "_Walls")
+            {
+                GameObject.Destroy(c.gameObject);
+                break;
+            }
+        }
+
+        GameObject newObj = new GameObject("_Walls");
+        newObj.transform.SetParent(transform, false);
+
+        BoxBuilder.BuildRoof(gameObject, this);
+        BoxBuilder.BuildWalls(newObj, this);
+    }
 }

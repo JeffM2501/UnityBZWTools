@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections.Generic;
+using BZFlag.IO.Elements;
 
 public class BZWWorld : BZWBasicObject
 {
@@ -47,4 +48,36 @@ public class BZWWorld : BZWBasicObject
 
 		return world;
 	}
+
+    public override void Setup(BasicObject elementObject)
+    {
+        World world = elementObject as World;
+
+        FromBZWObject(world);
+        BuildGeometry();
+    }
+
+    public override void BuildGeometry()
+    {
+        List<GameObject> toKill = new List<GameObject>();
+        foreach(Transform c in transform)
+        {
+            if (c.gameObject.name == "_Grass")
+            {
+                GameObject.Destroy(c.gameObject);
+                break;
+            }
+        }
+
+        GameObject grass = new GameObject("_Grass");
+        grass.transform.SetParent(transform, false);
+        GroundBuilder.BuildGrass(grass, this);
+
+        if (!NoWalls)
+        {
+            GameObject walls = new GameObject("_Walls");
+            walls.transform.SetParent(grass.transform, false);
+            GroundBuilder.BuildWalls(walls, this);
+        }
+    }
 }

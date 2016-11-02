@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
+using BZFlag.IO.Elements.Shapes;
+using BZFlag.IO.Elements;
 
 public class BZWBase : BZWBox
 {
@@ -26,19 +28,44 @@ public class BZWBase : BZWBox
 
 	}
 
-	public override void FromBZWObject(BZFlag.IO.Elements.Shapes.Box b)
+	public override void FromBZWObject(Box b)
 	{
 		base.FromBZWObject(b);
 
-		BZFlag.IO.Elements.Shapes.Base bs = b as BZFlag.IO.Elements.Shapes.Base;
+		BZFlag.IO.Elements.Shapes.Base bs = b as Base;
 		if(bs != null)
 			TeamColor = (BaseColors)bs.TeamColor;
 	}
 
-	public override BZFlag.IO.Elements.BasicObject ToBZWObject()
+	public override BasicObject ToBZWObject()
 	{
-		var obj = OutputToPhaseable(new BZFlag.IO.Elements.Shapes.Base()) as BZFlag.IO.Elements.Shapes.Base;
+		var obj = OutputToPhaseable(new Base()) as Base;
 		obj.TeamColor = (BZFlag.IO.Elements.Shapes.Base.TeamColors)TeamColor;
 		return obj;
 	}
+
+    public override void Setup(BasicObject elementObject)
+    {
+        FromBZWObject(elementObject as Box);
+        BuildGeometry();
+    }
+
+    public override void BuildGeometry()
+    {
+        List<GameObject> toKill = new List<GameObject>();
+        foreach (Transform c in transform)
+        {
+            if (c.gameObject.name == "_Walls")
+            {
+                GameObject.Destroy(c.gameObject);
+                break;
+            }
+        }
+
+        GameObject newObj = new GameObject("_Walls");
+        newObj.transform.SetParent(transform, false);
+
+        BaseBuilder.BuildRoof(gameObject, this);
+        BaseBuilder.BuildWalls(newObj, this);
+    }
 }
