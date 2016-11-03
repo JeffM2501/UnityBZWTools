@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEditor;
 
 using System.Collections.Generic;
 
@@ -146,9 +145,9 @@ public class TeleporterBuilder
 		filter.sharedMesh = mesh;
 
 		MeshRenderer render = obj.AddComponent<MeshRenderer>() as MeshRenderer;
-
+#if !UNITY_WEBGL
 		render.sharedMaterial = (Material)AssetDatabase.LoadAssetAtPath("Assets/BZWTools/StandardAssets/Textures/telelink.mat", typeof(Material));
-
+#endif
 		MeshCollider collider = obj.AddComponent<MeshCollider>() as MeshCollider;
 		collider.sharedMesh = mesh;
 		obj.isStatic = true;
@@ -521,9 +520,9 @@ public class TeleporterBuilder
 		filter.sharedMesh = mesh;
 
 		MeshRenderer render = obj.AddComponent<MeshRenderer>() as MeshRenderer;
-
+#if !UNITY_WEBGL
 		render.sharedMaterial = (Material)AssetDatabase.LoadAssetAtPath("Assets/BZWTools/StandardAssets/Textures/caution.mat", typeof(Material));
-
+#endif
 		MeshCollider collider = obj.AddComponent<MeshCollider>() as MeshCollider;
 		collider.sharedMesh = mesh;
 		obj.isStatic = true;

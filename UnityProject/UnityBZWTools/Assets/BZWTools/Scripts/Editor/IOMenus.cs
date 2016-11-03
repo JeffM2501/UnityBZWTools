@@ -69,4 +69,74 @@ public class IOMenus : MonoBehaviour
 	{
 		FromBZW.CreateNewBZWRoot(new Map());
 	}
+
+	[MenuItem("BZWTools/Windows/Show BZWTools")]
+	public static void ShowWindow()
+	{
+		//Show existing window instance. If one doesn't exist, make one.
+		EditorWindow.GetWindow(typeof(BZWToolsWindow));
+	}
+
+	[MenuItem("BZWTools/Tools/Strip For Preview")]
+	public static void StripForPreview()
+	{
+		//Show existing window instance. If one doesn't exist, make one.
+		GameObject root = BZWToolsWindow.GetRoot();
+
+		DeleteBZWComponentsOnChildren(root);
+	}
+
+	private static void DeleteBZWComponentsOnChildren(GameObject obj)
+	{
+		DeleteBZWComponents(obj);
+		foreach(Transform t in obj.transform)
+			DeleteBZWComponentsOnChildren(t.gameObject);
+	}
+
+	private static void DeleteBZWComponents(GameObject obj)
+	{
+		BZWBasicObject b = obj.GetComponent<BZWBasicObject>();
+		if(b != null)
+			GameObject.DestroyImmediate(b);
+
+		b = obj.GetComponent<BZWUnknown>();
+		if(b != null)
+			GameObject.DestroyImmediate(b);
+
+		b = obj.GetComponent<BZWWorld>();
+		if(b != null)
+			GameObject.DestroyImmediate(b); ;
+
+		b = obj.GetComponent<BZWOptions>();
+		if(b != null)
+			GameObject.DestroyImmediate(b);
+
+		b = obj.GetComponent<BZWPhaseableObject>();
+		if(b != null)
+			GameObject.DestroyImmediate(b);
+
+		b = obj.GetComponent<BZWPyramid>();
+		if(b != null)
+			GameObject.DestroyImmediate(b);
+
+		b = obj.GetComponent<BZWBox>();
+		if(b != null)
+			GameObject.DestroyImmediate(b);
+
+		b = obj.GetComponent<BZWBase>();
+		if(b != null)
+			GameObject.DestroyImmediate(b);
+
+		b = obj.GetComponent<BZWLink>();
+		if(b != null)
+			GameObject.DestroyImmediate(b);
+
+		b = obj.GetComponent<BZWTeleporter>();
+		if(b != null)
+			GameObject.DestroyImmediate(b);
+
+		b = obj.GetComponent<BZWZone>();
+		if(b != null)
+			GameObject.DestroyImmediate(b);
+	}
 }

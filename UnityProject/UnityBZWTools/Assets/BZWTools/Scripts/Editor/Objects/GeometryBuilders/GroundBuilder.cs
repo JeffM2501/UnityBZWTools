@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEditor;
 
 using System.Collections.Generic;
 
@@ -147,9 +146,9 @@ public class GroundBuilder
 		filter.sharedMesh = mesh;
 
 		MeshRenderer render = obj.AddComponent<MeshRenderer>() as MeshRenderer;
-
+#if !UNITY_WEBGL
 		render.sharedMaterial = (Material)AssetDatabase.LoadAssetAtPath("Assets/BZWTools/StandardAssets/Textures/wall.mat", typeof(Material));
-
+#endif
 		MeshCollider collider = obj.AddComponent<MeshCollider>() as MeshCollider;
 		collider.sharedMesh = mesh;
 
@@ -203,9 +202,9 @@ public class GroundBuilder
 		filter.sharedMesh = mesh;
 
 		MeshRenderer render = obj.AddComponent<MeshRenderer>() as MeshRenderer;
-
+#if !UNITY_WEBGL
 		render.sharedMaterial = (Material)AssetDatabase.LoadAssetAtPath("Assets/BZWTools/StandardAssets/Textures/std_ground.mat", typeof(Material));
-
+#endif
 		MeshCollider collider = obj.AddComponent<MeshCollider>() as MeshCollider;
 		collider.sharedMesh = mesh;
 
