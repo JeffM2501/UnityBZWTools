@@ -27,8 +27,10 @@ namespace BZFlag.IO
 		internal static string GetRestOfWords(string text)
 		{
 			string tmp = TrimTrainingComments(text);
-			if(tmp.Contains(" "))
-				tmp = text.Substring(text.IndexOf(' ')).Trim();
+            if (tmp.Contains(" "))
+                tmp = text.Substring(text.IndexOf(' ')).Trim();
+            else
+                tmp = string.Empty;
 			return tmp;
 		}
 
@@ -105,6 +107,7 @@ namespace BZFlag.IO
 				obj = null;
 			}
 
+            map.FinishLoad();
 			return map;
 		}
     }

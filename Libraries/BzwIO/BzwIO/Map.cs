@@ -29,7 +29,7 @@ namespace BZFlag.IO
                     continue;
 
                 if (tp.Name == string.Empty)
-                    tp.Name = tp.Index.ToString();
+                    tp.Name = "teleporter_" + tp.Index.ToString();
             }
         }
 

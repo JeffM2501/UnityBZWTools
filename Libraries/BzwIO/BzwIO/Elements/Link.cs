@@ -72,7 +72,7 @@ namespace BZFlag.IO.Elements
                     int faceID = 0;
                     int.TryParse(code, out faceID);
 
-                    TargetName = (faceID / 2).ToString();
+                    TargetName = "teleporter_" + (faceID / 2).ToString();
                     Front = faceID % 2 == 1;
                 }
             }
@@ -124,7 +124,9 @@ namespace BZFlag.IO.Elements
 		{
 			Code.Clear();
 
-			AddCode(1, "name", Name);
+            if (Name != string.Empty)
+			    AddCode(1, "name", Name);
+
             AddCode(1, "from", From.GetCode());
             AddCode(1, "to", To.GetCode());
             foreach (var s in Attributes)

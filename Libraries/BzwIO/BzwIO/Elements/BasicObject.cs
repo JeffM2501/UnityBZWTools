@@ -75,6 +75,9 @@ namespace BZFlag.IO.Elements
 
 		public void AddCode(int indent, string name, string value)
 		{
+            if (name == string.Empty)
+                return;
+
 			StringBuilder sb = GetIndent(indent);
 			sb.Append(name);
 			if (value != string.Empty)
