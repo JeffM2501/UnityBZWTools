@@ -32,7 +32,7 @@ namespace BZFlag.IO.Elements
 		{
 			Code.Clear();
 
-			AddCode(1, "Height", Height);
+			AddCode(1, "height", Height);
 			foreach(var s in Attributes)
 				AddCode(2, s, string.Empty);
 

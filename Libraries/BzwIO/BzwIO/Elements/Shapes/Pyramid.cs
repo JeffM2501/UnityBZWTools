@@ -42,7 +42,7 @@ namespace BZFlag.IO.Elements.Shapes
 			string name = base.BuildCode();
 
 			if (FlipZ)
-				AddCode(1, "FlipZ", string.Empty);
+				AddCode(1, "flipz", string.Empty);
 
             return name;
 		}

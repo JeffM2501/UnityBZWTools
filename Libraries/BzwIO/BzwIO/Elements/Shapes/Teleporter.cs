@@ -57,7 +57,7 @@ namespace BZFlag.IO.Elements.Shapes
             if (Ricochet)
                 AddCode(1, "ricochet", string.Empty);
 
-            string t = "Teleporter";
+            string t = "teleporter";
             if (Name != string.Empty)
                 t += " " + Name;
 

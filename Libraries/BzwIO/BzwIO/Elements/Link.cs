@@ -124,9 +124,9 @@ namespace BZFlag.IO.Elements
 		{
 			Code.Clear();
 
-			AddCode(1, "Name", Name);
-            AddCode(1, "From", From.GetCode());
-            AddCode(1, "To", To.GetCode());
+			AddCode(1, "name", Name);
+            AddCode(1, "from", From.GetCode());
+            AddCode(1, "to", To.GetCode());
             foreach (var s in Attributes)
 				AddCode(2, s, string.Empty);
 
