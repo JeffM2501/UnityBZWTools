@@ -49,9 +49,13 @@ namespace BZFlag.IO.Elements.Shapes
 
 		public override string BuildCode()
 		{
-			base.BuildCode();
+            Code.Clear();
+    
+            AddCode(1, "position", Position);
+            AddCode(1, "rotation", Rotation);
+            AddCode(1, "size", Size);
 
-			AddCode(1, "border", Border);
+            AddCode(1, "border", Border);
             if (Horizontal)
                 AddCode(1, "horizontal", string.Empty);
             if (Ricochet)

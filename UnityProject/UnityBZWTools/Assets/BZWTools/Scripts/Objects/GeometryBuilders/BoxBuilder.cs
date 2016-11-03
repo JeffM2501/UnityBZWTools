@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
+using UnityEditor;
 
 using System.Collections.Generic;
 
-public class BaseBuilder
+public class BoxBuilder
 {
 	public static float BoxFloorUVScale = 0.25f;
 	public static float BoxWallUVScale = 0.25f;
 
-	public static void BuildWalls(GameObject obj, BZWBase b)
+	public static void BuildWalls(GameObject obj, BZWBox box)
 	{
 		Mesh mesh = new Mesh();
 
@@ -20,7 +21,7 @@ public class BaseBuilder
 		List<Vector2> uvs = new List<Vector2>();
 		List<int> tris = new List<int>();
 
-		Vector3 scale = b.transform.localScale;
+		Vector3 scale = box.transform.localScale;
 
 		int offset = 0;
 
@@ -145,33 +146,14 @@ public class BaseBuilder
 
 		MeshRenderer render = obj.AddComponent<MeshRenderer>() as MeshRenderer;
 
-#if !UNITY_WEBGL
-		switch(b.TeamColor)
-		{
-			case BZWBase.BaseColors.Red:
-				render.sharedMaterial = (Material)AssetDatabase.LoadAssetAtPath("Assets/BZWTools/StandardAssets/Textures/red_basewall.mat", typeof(Material));
-				break;
-
-			case BZWBase.BaseColors.Green:
-				render.sharedMaterial = (Material)AssetDatabase.LoadAssetAtPath("Assets/BZWTools/StandardAssets/Textures/green_basewall.mat", typeof(Material));
-				break;
-
-			case BZWBase.BaseColors.Blue:
-				render.sharedMaterial = (Material)AssetDatabase.LoadAssetAtPath("Assets/BZWTools/StandardAssets/Textures/blue_basewall.mat", typeof(Material));
-				break;
-
-			case BZWBase.BaseColors.Purple:
-				render.sharedMaterial = (Material)AssetDatabase.LoadAssetAtPath("Assets/BZWTools/StandardAssets/Textures/purple_basewall.mat", typeof(Material));
-				break;
-		}
-#endif
+		render.sharedMaterial = (Material)AssetDatabase.LoadAssetAtPath("Assets/BZWTools/StandardAssets/Textures/boxwall.mat", typeof(Material));
 
 		MeshCollider collider = obj.AddComponent<MeshCollider>() as MeshCollider;
 		collider.sharedMesh = mesh;
 		obj.isStatic = true;
 	}
 
-	public static void BuildRoof(GameObject obj, BZWBase b)
+	public static void BuildRoof(GameObject obj, BZWBox box)
 	{
 		Mesh mesh = new Mesh();
 
@@ -183,26 +165,26 @@ public class BaseBuilder
 		List<Vector3> norms = new List<Vector3>();
 		List<Vector2> uvs = new List<Vector2>();
 
-		//Vector3 scale = b.transform.localScale;
+		Vector3 scale = box.transform.localScale;
 
 		int offset = 0;
 
 		// floor
 		verts.Add(new Vector3(-1, 0, 1));
 		norms.Add(Vector3.up);
-		uvs.Add(new Vector2(0, 1));
+		uvs.Add(new Vector2(-scale.x * BoxFloorUVScale, scale.z * BoxFloorUVScale));
 
 		verts.Add(new Vector3(1, 0, 1));
 		norms.Add(Vector3.up);
-		uvs.Add(new Vector2(1, 1));
+		uvs.Add(new Vector2(scale.x * BoxFloorUVScale, scale.z * BoxFloorUVScale));
 
 		verts.Add(new Vector3(1, 0, -1));
 		norms.Add(Vector3.up);
-		uvs.Add(new Vector2(1, 0));
+		uvs.Add(new Vector2(scale.x * BoxFloorUVScale, -scale.z * BoxFloorUVScale));
 
 		verts.Add(new Vector3(-1, 0, -1));
 		norms.Add(Vector3.up);
-		uvs.Add(new Vector2(0, 0));
+		uvs.Add(new Vector2(-scale.x * BoxFloorUVScale, -scale.z * BoxFloorUVScale));
 
 		List<int> tris = new List<int>();
 
@@ -219,19 +201,19 @@ public class BaseBuilder
 		// roof
 		verts.Add(new Vector3(-1, 1, 1));
 		norms.Add(Vector3.up);
-		uvs.Add(new Vector2(0, 1));
+		uvs.Add(new Vector2(-scale.x * BoxFloorUVScale, scale.z * BoxFloorUVScale));
 
 		verts.Add(new Vector3(1, 1, 1));
 		norms.Add(Vector3.up);
-		uvs.Add(new Vector2(1, 1));
+		uvs.Add(new Vector2(scale.x * BoxFloorUVScale, scale.z * BoxFloorUVScale));
 
 		verts.Add(new Vector3(1, 1, -1));
 		norms.Add(Vector3.up);
-		uvs.Add(new Vector2(1, -0));
+		uvs.Add(new Vector2(scale.x * BoxFloorUVScale, -scale.z * BoxFloorUVScale));
 
 		verts.Add(new Vector3(-1, 1, -1));
 		norms.Add(Vector3.up);
-		uvs.Add(new Vector2(0, 0));
+		uvs.Add(new Vector2(-scale.x * BoxFloorUVScale, -scale.z * BoxFloorUVScale));
 
 		tris.Add(0 + offset);
 		tris.Add(1 + offset);
@@ -250,29 +232,14 @@ public class BaseBuilder
 		mesh.normals = norms.ToArray();
 		mesh.triangles = tris.ToArray();
 
+		mesh.name = "Box";
+
 		filter.sharedMesh = mesh;
 
 		MeshRenderer render = obj.AddComponent<MeshRenderer>() as MeshRenderer;
-#if !UNITY_WEBGL
-		switch(b.TeamColor)
-		{
-			case BZWBase.BaseColors.Red:
-				render.sharedMaterial = (Material)AssetDatabase.LoadAssetAtPath("Assets/BZWTools/StandardAssets/Textures/red_basetop.mat", typeof(Material));
-				break;
 
-			case BZWBase.BaseColors.Green:
-				render.sharedMaterial = (Material)AssetDatabase.LoadAssetAtPath("Assets/BZWTools/StandardAssets/Textures/green_basetop.mat", typeof(Material));
-				break;
+		render.sharedMaterial = (Material)AssetDatabase.LoadAssetAtPath("Assets/BZWTools/StandardAssets/Textures/roof.mat", typeof(Material));
 
-			case BZWBase.BaseColors.Blue:
-				render.sharedMaterial = (Material)AssetDatabase.LoadAssetAtPath("Assets/BZWTools/StandardAssets/Textures/blue_basetop.mat", typeof(Material));
-				break;
-
-			case BZWBase.BaseColors.Purple:
-				render.sharedMaterial = (Material)AssetDatabase.LoadAssetAtPath("Assets/BZWTools/StandardAssets/Textures/purple_basetop.mat", typeof(Material));
-				break;
-		}
-#endif
 		MeshCollider collider = obj.AddComponent<MeshCollider>() as MeshCollider;
 		collider.sharedMesh = mesh;
 		obj.isStatic = true;

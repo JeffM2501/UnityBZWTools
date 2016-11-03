@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEditor;
 
 using System.Collections.Generic;
 
@@ -56,7 +57,6 @@ public class PyramidBuilder
 		tris.Add(2 + offset);
 
 		offset = verts.Count;
-
 
 		// X+ wall
 		verts.Add(new Vector3(1, 0, 1));
@@ -271,9 +271,9 @@ public class PyramidBuilder
 			filter.sharedMesh = BuildNormalMesh(obj,pyr);
 
 		MeshRenderer render = obj.AddComponent<MeshRenderer>() as MeshRenderer;
-#if !UNITY_WEBGL
+
 		render.sharedMaterial = (Material)AssetDatabase.LoadAssetAtPath("Assets/BZWTools/StandardAssets/Textures/pyrwall.mat", typeof(Material));
-#endif
+
 		MeshCollider collider = obj.AddComponent<MeshCollider>() as MeshCollider;
 		collider.sharedMesh = filter.sharedMesh;
 
