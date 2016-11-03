@@ -10,6 +10,8 @@
 /UnityProject/*.csproj
 /UnityProject/*.unityproj
 /UnityProject/*.sln
+UnityProject/**/*.csproj
+UnityProject/**/*.sln
 *.suo
 *.tmp
 *.user
