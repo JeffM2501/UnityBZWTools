@@ -130,7 +130,7 @@ namespace BZFlag.IO.Elements
             AddCode(1, "from", From.GetCode());
             AddCode(1, "to", To.GetCode());
             foreach (var s in Attributes)
-				AddCode(2, s, string.Empty);
+				AddCode(2, s);
 
 			return ObjectType;
 		}

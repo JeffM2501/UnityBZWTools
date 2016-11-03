@@ -41,18 +41,18 @@ namespace BZFlag.IO.Elements.Shapes
             string name = base.BuildCode();
 
             if (Passable)
-                AddCode(1, "passable", string.Empty);
+                AddCode(1, "passable");
             else
             {
                 if (DriveThrough)
-                    AddCode(1, "drivethrough", string.Empty);
+                    AddCode(1, "drivethrough");
 
                 if (ShootThrough)
-                    AddCode(1, "shootthrough", string.Empty);
+                    AddCode(1, "shootthrough");
             }
 
             if (Ricochet)
-                AddCode(1, "ricochet", string.Empty);
+                AddCode(1, "ricochet");
 
             return name;
 		}

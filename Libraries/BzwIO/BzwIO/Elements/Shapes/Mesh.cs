@@ -208,14 +208,14 @@ namespace BZFlag.IO.Elements.Shapes
                 AddCode(1, "phydrv", PhysicsDriver);
 
             if (NoClusters)
-                AddCode(1, "noclusters", string.Empty);
+                AddCode(1, "noclusters");
 
             if (SmoothBounce)
-                AddCode(1, "smoothbounce", string.Empty);
+                AddCode(1, "smoothbounce");
 
             foreach(var face in Faces)
             {
-                AddCode(1, "face", string.Empty);
+                AddCode(1, "face");
 
                 AddCode(2, "vertices", string.Join(" ",Utilities.GetStringList<int>(face.Vertecies)));
                 AddCode(2, "normals", string.Join(" ", Utilities.GetStringList<int>(face.Normals)));
@@ -225,22 +225,22 @@ namespace BZFlag.IO.Elements.Shapes
                     AddCode(2, "phydrv", PhysicsDriver);
 
                 if (face.NoClusters)
-                    AddCode(2, "noclusters", string.Empty);
+                    AddCode(2, "noclusters");
 
                 if (face.SmoothBounce)
-                    AddCode(2, "smoothbounce", string.Empty);
+                    AddCode(2, "smoothbounce");
 
                 if (face.Passable)
-                    AddCode(2, "passable", string.Empty);
+                    AddCode(2, "passable");
                 else
                 {
                     if (face.ShootThrough)
-                        AddCode(2, "shootthrough", string.Empty);
+                        AddCode(2, "shootthrough");
                     if (face.DriveThrough)
-                        AddCode(2, "drivethrough", string.Empty);
+                        AddCode(2, "drivethrough");
                 }
 
-                AddCode(1, "endface", string.Empty);
+                AddCode(1, "endface");
             }
 
            return name;

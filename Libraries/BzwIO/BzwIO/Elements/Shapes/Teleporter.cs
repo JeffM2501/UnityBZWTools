@@ -57,9 +57,9 @@ namespace BZFlag.IO.Elements.Shapes
 
             AddCode(1, "border", Border);
             if (Horizontal)
-                AddCode(1, "horizontal", string.Empty);
+                AddCode(1, "horizontal");
             if (Ricochet)
-                AddCode(1, "ricochet", string.Empty);
+                AddCode(1, "ricochet");
 
             string t = "teleporter";
             if (Name != string.Empty)

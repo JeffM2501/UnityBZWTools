@@ -57,7 +57,7 @@ namespace BZFlag.IO.Elements
                 AddCode(1, "death", Death);
 
             foreach (var s in Attributes)
-                AddCode(2, s, string.Empty);
+                AddCode(2, s);
 
             return ObjectType;
         }

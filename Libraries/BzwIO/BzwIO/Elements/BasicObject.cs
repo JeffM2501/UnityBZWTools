@@ -55,7 +55,7 @@ namespace BZFlag.IO.Elements
 			Code.Clear();
 
 			foreach(string c in code)
-				AddCode(1, c, string.Empty);
+				AddCode(1, c);
 
             string t = ObjectType;
             if (TypeParams != null)
@@ -75,7 +75,7 @@ namespace BZFlag.IO.Elements
 
 		public void AddCode(int indent, string name, string value)
 		{
-            if (name == string.Empty)
+            if (name == string.Empty || value == string.Empty)
                 return;
 
 			StringBuilder sb = GetIndent(indent);
@@ -99,7 +99,17 @@ namespace BZFlag.IO.Elements
 			AddCode(indent, name, value ? "1" : "0");
 		}
 
-		public void AddCode(int indent, string name, float[] values)
+        public void AddCode(int indent, string name)
+        {
+            if (name == string.Empty)
+                return;
+
+            StringBuilder sb = GetIndent(indent);
+            sb.Append(name);
+            Code.Add(sb.ToString());
+        }
+
+        public void AddCode(int indent, string name, float[] values)
 		{
 			StringBuilder sb = new StringBuilder();
 			for(int i = 0; i < values.Length; i++)

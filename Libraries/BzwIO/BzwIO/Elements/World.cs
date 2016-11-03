@@ -50,13 +50,13 @@ namespace BZFlag.IO.Elements
 			AddCode(1,"size", Size);
 			AddCode(1, "flagHeight", FlagHeight);
 			if (NoWalls)
-				AddCode(1, "noWalls", string.Empty);
+				AddCode(1, "noWalls");
 
 			if(FreeCTFSpawns)
-				AddCode(1, "freeCTFSpawns", string.Empty);
+				AddCode(1, "freeCTFSpawns");
 
 			foreach(var s in Attributes)
-				AddCode(2, s, string.Empty);
+				AddCode(2, s);
 
             return ObjectType;
 		}
