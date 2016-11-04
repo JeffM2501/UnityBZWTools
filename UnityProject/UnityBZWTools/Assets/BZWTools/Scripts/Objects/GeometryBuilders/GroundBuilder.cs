@@ -209,9 +209,7 @@ public class GroundBuilder
 		filter.sharedMesh = mesh;
 
 		MeshRenderer render = obj.AddComponent<MeshRenderer>() as MeshRenderer;
-#if !UNITY_WEBGL
 		render.sharedMaterial = (Material)AssetDatabase.LoadAssetAtPath(material, typeof(Material));
-#endif
 		MeshCollider collider = obj.AddComponent<MeshCollider>() as MeshCollider;
 		collider.sharedMesh = mesh;
 

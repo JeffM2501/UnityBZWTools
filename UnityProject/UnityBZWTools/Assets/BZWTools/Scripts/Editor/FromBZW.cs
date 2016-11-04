@@ -53,7 +53,12 @@ public class FromBZW
     {
         AddToRoot(BZWToolsWindow.GetRoot(), gb);
         T bzw = gb.AddComponent<T>();
-        bzw.Setup(obj);
+		string name = obj.Name;
+		if(name == string.Empty)
+			name = obj.ObjectType + "_" + obj.GUID;
+		gb.name = name;
+
+		bzw.Setup(obj);
 
         return gb;
     }
@@ -67,7 +72,10 @@ public class FromBZW
 	}
     public static GameObject GetZonePrefab()
     {
-        return (GameObject)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/BZWTools/Prefabs/Meshes/Zone", typeof(GameObject)));
+		var obj = AssetDatabase.LoadAssetAtPath("Assets/BZWTools/Prefabs/BZWZone.prefab", typeof(GameObject));
+		//var obj = AssetDatabase.LoadAssetAtPath("Assets/BZWTools/Prefabs/Meshes/Zone.obj", typeof(GameObject));
+
+		return (GameObject)GameObject.Instantiate(obj);
     }
 
 	public static void ReadUserBZW(string path)
@@ -103,9 +111,11 @@ public class FromBZW
                     NewMapObject<BZWLink>(m);
                 else if (m as BZFlag.IO.Elements.WaterLevel != null)
                     NewMapObject<BZWWaterLevel>(m);
-                else if (m as BZFlag.IO.Elements.Shapes.Zone != null)
-                    AddMapObject<BZWZone>(GetZonePrefab(), m);
-                else
+				else if(m as BZFlag.IO.Elements.Physics != null)
+					NewMapObject<BZWPhysics>(m);
+				else if(m as BZFlag.IO.Elements.Shapes.Zone != null)
+					AddMapObject<BZWZone>(GetZonePrefab(), m);
+				else
                     NewMapObject<BZWUnknown>(m);
 				count++;
 			}

@@ -8,6 +8,12 @@ using BZFlag.IO.Elements.Shapes;
 
 public class BZWToolsWindow : EditorWindow
 {
+	protected int LastSelectedOtherObject = 0;
+	protected string[] OtherObjects = new string[]
+	{
+		"Physics",
+		"Zone",
+	};
     public void OnGUI()
     {
         GUILayout.Label("Objects", EditorStyles.boldLabel);
@@ -24,16 +30,37 @@ public class BZWToolsWindow : EditorWindow
             AddBase();
         if (GUILayout.Button("Add WaterLevel"))
             AddWaterLevel();
-        if (GUILayout.Button("Add Zone"))
-            AddZone();
 
-        EditorGUILayout.BeginVertical();
+		EditorGUILayout.BeginHorizontal();
+		LastSelectedOtherObject = EditorGUILayout.Popup("", LastSelectedOtherObject, OtherObjects);
+		if(GUILayout.Button("Add"))
+			AddOther();
+		EditorGUILayout.EndHorizontal();
+
+		EditorGUILayout.BeginVertical();
         GUILayout.Label("Geometry", EditorStyles.boldLabel);
         if (GUILayout.Button("Rebuild Geometry"))
             RebuildGeo();
 
         EditorGUILayout.EndVertical();
     }
+
+	void AddOther()
+	{
+		switch(LastSelectedOtherObject)
+		{
+			case 0:
+				AddPhysics();
+			
+				break;
+			case 1:
+				AddZone();
+				break; 
+
+			default:
+				break;
+		}
+	}
 
     public static GameObject GetRoot()
     {
@@ -96,7 +123,11 @@ public class BZWToolsWindow : EditorWindow
         if (b != null)
             return b;
 
-        return null;
+		b = obj.GetComponent<BZWPhysics>();
+		if(b != null)
+			return b;
+
+		return null;
     }
 
     public void RebuildGeoInChildren(GameObject obj)
@@ -153,6 +184,7 @@ public class BZWToolsWindow : EditorWindow
     {
         WaterLevel t = new WaterLevel();
         t.Name = "WaterLevel";
+		t.Height = 1;
         FromBZW.NewMapObject<BZWWaterLevel>(t);
     }
 
@@ -161,5 +193,12 @@ public class BZWToolsWindow : EditorWindow
         Zone t = new Zone();
         t.Name = "NewZone_" + t.GUID;
         FromBZW.AddMapObject<BZWZone>(FromBZW.GetZonePrefab(), t);
-    }
+	}
+
+	public void AddPhysics()
+	{
+		BZFlag.IO.Elements.Physics t = new BZFlag.IO.Elements.Physics();
+		t.Name = "NewPhysics_" + t.GUID;
+		FromBZW.NewMapObject<BZWPhysics>(t);
+	}
 }
