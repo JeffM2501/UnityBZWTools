@@ -19,7 +19,16 @@ public class BZWWaterLevel : BZWBasicObject
 
     }
 
-    public virtual void FromBZWObject(BZFlag.IO.Elements.WaterLevel obj)
+	public override BasicObject ToBZWObject()
+	{
+		var water = new WaterLevel();
+		water.Attributes = Attributes;
+		water.Height = transform.localPosition.y;
+
+		return water;
+	}
+
+	public virtual void FromBZWObject(BZFlag.IO.Elements.WaterLevel obj)
     {
         Name = obj.Name;
 
