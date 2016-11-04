@@ -153,7 +153,7 @@ public class BZWToolsWindow : EditorWindow
     {
         WaterLevel t = new WaterLevel();
         t.Name = "WaterLevel";
-        FromBZW.NewMapObject<BZWUnknown>(t);
+        FromBZW.NewMapObject<BZWWaterLevel>(t);
     }
 
     public void AddZone()

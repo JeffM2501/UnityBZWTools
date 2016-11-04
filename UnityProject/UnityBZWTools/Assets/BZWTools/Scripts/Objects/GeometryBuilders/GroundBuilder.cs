@@ -156,7 +156,13 @@ public class GroundBuilder
 		obj.isStatic = true;
 	}
 
-	public static void BuildGrass(GameObject obj, BZWWorld world)
+    public static void BuildGrass(GameObject obj, BZWWorld world)
+    {
+        BuildGroundPlane(obj, world.Size, "Assets/BZWTools/StandardAssets/Textures/std_ground.mat");
+    }
+
+
+    public static void BuildGroundPlane(GameObject obj, float size, string material)
 	{
 		Mesh mesh = new Mesh();
 
@@ -170,19 +176,19 @@ public class GroundBuilder
 
 		verts.Add(new Vector3(-1, 0, 1));
 		norms.Add(Vector3.up);
-		uvs.Add(new Vector2(-world.Size * GrassUVSCale, world.Size * GrassUVSCale));
+		uvs.Add(new Vector2(-size * GrassUVSCale, size * GrassUVSCale));
 
 		verts.Add(new Vector3(1, 0, 1));
 		norms.Add(Vector3.up);
-		uvs.Add(new Vector2(world.Size * GrassUVSCale, world.Size * GrassUVSCale));
+		uvs.Add(new Vector2(size * GrassUVSCale, size * GrassUVSCale));
 
 		verts.Add(new Vector3(1, 0, -1));
 		norms.Add(Vector3.up);
-		uvs.Add(new Vector2(world.Size * GrassUVSCale, -world.Size * GrassUVSCale));
+		uvs.Add(new Vector2(size * GrassUVSCale, -size * GrassUVSCale));
 		
 		verts.Add(new Vector3(-1, 0, -1));
 		norms.Add(Vector3.up);
-		uvs.Add(new Vector2(-world.Size * GrassUVSCale, -world.Size * GrassUVSCale));
+		uvs.Add(new Vector2(-size * GrassUVSCale, -size * GrassUVSCale));
 
 		List<int> tris = new List<int>();
 
@@ -204,12 +210,12 @@ public class GroundBuilder
 
 		MeshRenderer render = obj.AddComponent<MeshRenderer>() as MeshRenderer;
 #if !UNITY_WEBGL
-		render.sharedMaterial = (Material)AssetDatabase.LoadAssetAtPath("Assets/BZWTools/StandardAssets/Textures/std_ground.mat", typeof(Material));
+		render.sharedMaterial = (Material)AssetDatabase.LoadAssetAtPath(material, typeof(Material));
 #endif
 		MeshCollider collider = obj.AddComponent<MeshCollider>() as MeshCollider;
 		collider.sharedMesh = mesh;
 
-		obj.transform.localScale = new Vector3(world.Size, 1, world.Size);
+		obj.transform.localScale = new Vector3(size, 1, size);
 		obj.isStatic = true;
 	}
 }

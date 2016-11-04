@@ -101,6 +101,8 @@ public class FromBZW
                     NewMapObject<BZWTeleporter>(m);
                 else if(m as BZFlag.IO.Elements.Link != null)
                     NewMapObject<BZWLink>(m);
+                else if (m as BZFlag.IO.Elements.WaterLevel != null)
+                    NewMapObject<BZWWaterLevel>(m);
                 else if (m as BZFlag.IO.Elements.Shapes.Zone != null)
                     AddMapObject<BZWZone>(GetZonePrefab(), m);
                 else
