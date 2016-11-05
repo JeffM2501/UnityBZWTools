@@ -73,8 +73,6 @@ public class FromBZW
     public static GameObject GetZonePrefab()
     {
 		var obj = AssetDatabase.LoadAssetAtPath("Assets/BZWTools/Prefabs/BZWZone.prefab", typeof(GameObject));
-		//var obj = AssetDatabase.LoadAssetAtPath("Assets/BZWTools/Prefabs/Meshes/Zone.obj", typeof(GameObject));
-
 		return (GameObject)GameObject.Instantiate(obj);
     }
 

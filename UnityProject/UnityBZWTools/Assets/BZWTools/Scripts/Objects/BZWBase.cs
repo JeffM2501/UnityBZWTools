@@ -5,7 +5,6 @@ using BZFlag.IO.Elements;
 
 public class BZWBase : BZWBox
 {
-	
 	public enum BaseColors
 	{
 		Red = 1,

@@ -160,8 +160,8 @@ public class BZWToolsWindow : EditorWindow
     public void AddTeleporter()
     {
         Teleporter t = new Teleporter();
-        t.Size = new BZFlag.IO.Types.Vector3F(1, 1, 1);
-        t.Border = 0.25f;
+        t.Size = new BZFlag.IO.Types.Vector3F(0.25f, 3, 10);
+        t.Border = 0.5f;
         t.Name = "NewTeleporter_" + t.GUID;
         FromBZW.NewMapObject<BZWTeleporter>(t);
     }
