@@ -85,13 +85,13 @@ public class BZWTeleporter : BZWBasicObject
 		var front = (GameObject)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/BZWTools/Prefabs/Glyphs/TeleporterFront.prefab", typeof(GameObject)));
 		front.transform.SetParent(transform, false);
 	//	front.transform.localScale = new Vector3(1, transform.localScale.x / transform.localScale.y, 1);
-		front.transform.localPosition = new Vector3(-1.1f, 0.5f, 0);
+		front.transform.localPosition = new Vector3(1.1f, 0.5f, 0);
 	//	front.transform.Rotate(Vector3.up, -90);
 
 		var back = (GameObject)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/BZWTools/Prefabs/Glyphs/TeleporterBack.prefab", typeof(GameObject)));
 		back.transform.SetParent(transform, false);
 	//	back.transform.localScale = new Vector3(1, transform.localScale.x / transform.localScale.y, 1);
-		back.transform.localPosition = new Vector3(1.1f, 0.5f, 0);
+		back.transform.localPosition = new Vector3(-1.1f, 0.5f, 0);
 	//	back.transform.Rotate(Vector3.up, 90);
 
 	}
