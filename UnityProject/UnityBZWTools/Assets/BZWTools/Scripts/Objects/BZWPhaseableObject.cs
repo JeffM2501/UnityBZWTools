@@ -27,6 +27,10 @@ public class BZWPhaseableObject : BZWBasicObject
 		Name = obj.Name;
 		SetupFromPoisitionalbe(obj);
 		Attributes = obj.Attributes;
+		Passable = obj.Passable;
+		DriveThrough = obj.DriveThrough;
+		ShootThrough = obj.ShootThrough;
+		Ricochet = obj.Ricochet;
 		GUID = obj.GUID;
 	}
 
@@ -35,6 +39,12 @@ public class BZWPhaseableObject : BZWBasicObject
 		OutputToPoisitionalbe(obj);
 		obj.Attributes = Attributes;
 		obj.GUID = GUID;
+
+		obj.Passable = Passable;
+		obj.DriveThrough = DriveThrough;
+		obj.ShootThrough = ShootThrough;
+		obj.Ricochet = Ricochet;
+
 		return obj;
 	}
 

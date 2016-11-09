@@ -7,6 +7,7 @@ public class BZWPyramid : BZWPhaseableObject
 {
 	public bool FlipZ = false;
 
+	private bool LastFlipZ = false;
 	// Use this for initialization
 	void Start()
 	{
@@ -36,10 +37,16 @@ public class BZWPyramid : BZWPhaseableObject
     {
         FromBZWObject(elementObject as Pyramid);
         BuildGeometry();
-    }
+		LastFlipZ = FlipZ;
+	}
 
     public override void BuildGeometry()
     {
         PyramidBuilder.Build(gameObject, this);
     }
+
+	public void OnValidate()
+	{
+		BuildGeometry();
+	}
 }
