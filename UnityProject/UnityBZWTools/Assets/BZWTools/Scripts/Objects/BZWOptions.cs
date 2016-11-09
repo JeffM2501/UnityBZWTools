@@ -19,23 +19,23 @@ public class BZWOptions : BZWBasicObject
 	
 	}
 
-	public override void FromBZWObject(BZFlag.IO.Elements.BasicObject obj)
+	public virtual void FromBZWObject(Options obj)
 	{
 		Name = obj.Name;
-		Options = obj.Code;
+		Options = obj.Attributes;
 	}
 
 	public override BZFlag.IO.Elements.BasicObject ToBZWObject()
 	{
 		var options = new BZFlag.IO.Elements.Options();
 
-		options.Code = Options;
+		options.Attributes = Options;
 		return options;
 	}
 
     public override void Setup(BasicObject elementObject)
     {
-        FromBZWObject(elementObject);
+        FromBZWObject(elementObject as Options);
         BuildGeometry();
     }
 
