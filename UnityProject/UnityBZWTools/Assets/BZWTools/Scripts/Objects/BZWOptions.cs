@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-using BZFlag.IO.Elements;
+using BZFlag.Map.Elements;
 
 public class BZWOptions : BZWBasicObject
 {
@@ -25,9 +25,9 @@ public class BZWOptions : BZWBasicObject
 		Options = obj.Attributes;
 	}
 
-	public override BZFlag.IO.Elements.BasicObject ToBZWObject()
+	public override BZFlag.Map.Elements.BasicObject ToBZWObject()
 	{
-		var options = new BZFlag.IO.Elements.Options();
+		var options = new BZFlag.Map.Elements.Options();
 
 		options.Attributes = Options;
 		return options;

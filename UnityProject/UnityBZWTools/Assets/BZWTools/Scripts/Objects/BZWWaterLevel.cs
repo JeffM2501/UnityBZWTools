@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using BZFlag.IO.Elements;
-using BZFlag.IO.Elements.Shapes;
+using BZFlag.Map.Elements;
+using BZFlag.Map.Elements.Shapes;
 
 public class BZWWaterLevel : BZWBasicObject
 {
@@ -28,7 +28,7 @@ public class BZWWaterLevel : BZWBasicObject
 		return water;
 	}
 
-	public virtual void FromBZWObject(BZFlag.IO.Elements.WaterLevel obj)
+	public virtual void FromBZWObject(BZFlag.Map.Elements.WaterLevel obj)
     {
         Name = obj.Name;
 

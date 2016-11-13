@@ -5,15 +5,17 @@ using System.IO;
 using System;
 
 using BZFlag.IO;
-using BZFlag.IO.Elements.Shapes;
+using BZFlag.IO.BZW;
+using BZFlag.Map.Elements.Shapes;
+using BZFlag.Map;
 
 
 public class ToBZW 
 {
 
-	public static Map BuildBZW()
+	public static WorldMap BuildBZW()
 	{
-		Map map = new Map();
+		WorldMap map = new WorldMap();
 
 		BZWWorld root = GameObject.FindObjectOfType<BZWWorld>();
 		if(root == null)
@@ -22,7 +24,7 @@ public class ToBZW
 		if(root.Name == string.Empty)
 			map.WorldInfo.Name = "Untitled BZW";
 
-		map.WorldInfo = root.ToBZWObject() as BZFlag.IO.Elements.World;
+		map.WorldInfo = root.ToBZWObject() as BZFlag.Map.Elements.World;
 
 		for (int i = 0; i < root.gameObject.transform.childCount; i++)
 		{
@@ -35,7 +37,7 @@ public class ToBZW
 		return map;
 	}
 
-	public static bool SaveBZW(string path, Map map)
+	public static bool SaveBZW(string path, WorldMap map)
 	{
 		FileInfo file = new FileInfo(path);
 		if(file.Exists)

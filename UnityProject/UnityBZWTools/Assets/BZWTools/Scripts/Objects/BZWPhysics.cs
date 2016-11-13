@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-using BZFlag.IO.Elements;
+using BZFlag.Map.Elements;
+using BZFlag.Data.Types;
 
 
 public class BZWPhysics : BZWBasicObject
@@ -25,7 +26,7 @@ public class BZWPhysics : BZWBasicObject
 
 	}
 
-	public virtual void FromBZWObject(BZFlag.IO.Elements.Physics obj)
+	public virtual void FromBZWObject(BZFlag.Map.Elements.Physics obj)
 	{
 		GUID = obj.GUID;
 		Name = obj.Name;
@@ -36,13 +37,13 @@ public class BZWPhysics : BZWBasicObject
 		Attributes = obj.Attributes;
 	}
 
-	public override BZFlag.IO.Elements.BasicObject ToBZWObject()
+	public override BZFlag.Map.Elements.BasicObject ToBZWObject()
 	{
-		var phyz = new BZFlag.IO.Elements.Physics();
+		var phyz = new BZFlag.Map.Elements.Physics();
 		phyz.Name = name;
 		phyz.GUID = GUID;
-		phyz.Linear = new BZFlag.IO.Types.Vector3F(Linear.x, Linear.z, Linear.y);
-		phyz.Angular = new BZFlag.IO.Types.Vector3F(Angular.x, Linear.y, Angular.z);
+		phyz.Linear = new Vector3F(Linear.x, Linear.z, Linear.y);
+		phyz.Angular = new Vector3F(Angular.x, Linear.y, Angular.z);
 		phyz.Slide = Slide;
 		phyz.Death = Death.Trim();
 		phyz.Attributes = Attributes;
@@ -51,7 +52,7 @@ public class BZWPhysics : BZWBasicObject
 
 	public override void Setup(BasicObject elementObject)
 	{
-		FromBZWObject(elementObject as BZFlag.IO.Elements.Physics);
+		FromBZWObject(elementObject as BZFlag.Map.Elements.Physics);
 		BuildGeometry();
 	}
 

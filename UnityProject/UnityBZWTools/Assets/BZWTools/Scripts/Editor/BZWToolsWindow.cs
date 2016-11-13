@@ -2,9 +2,10 @@
 using UnityEditor;
 using System.Collections;
 
-using BZFlag.IO;
-using BZFlag.IO.Elements;
-using BZFlag.IO.Elements.Shapes;
+using BZFlag.IO.BZW;
+using BZFlag.Map;
+using BZFlag.Map.Elements;
+using BZFlag.Map.Elements.Shapes;
 
 public class BZWToolsWindow : EditorWindow
 {
@@ -68,7 +69,7 @@ public class BZWToolsWindow : EditorWindow
         if (root != null)
             return root.gameObject;
 
-        return FromBZW.CreateNewBZWRoot(new Map());
+        return FromBZW.CreateNewBZWRoot(new WorldMap());
     }
 
     public void RebuildGeo()
@@ -144,7 +145,7 @@ public class BZWToolsWindow : EditorWindow
     public void AddBox()
     {
         Box box = new Box();
-        box.Size = new BZFlag.IO.Types.Vector3F(1, 1, 1);
+        box.Size = new BZFlag.Data.Types.Vector3F(1, 1, 1);
         box.Name = "NewBox_" + box.GUID;
         FromBZW.NewMapObject<BZWBox>(box);
     }
@@ -152,7 +153,7 @@ public class BZWToolsWindow : EditorWindow
     public void AddPyramid()
     {
         Pyramid p = new Pyramid();
-        p.Size = new BZFlag.IO.Types.Vector3F(1, 1, 1);
+        p.Size = new BZFlag.Data.Types.Vector3F(1, 1, 1);
         p.Name = "NewPyramid_" + p.GUID;
         FromBZW.NewMapObject<BZWPyramid>(p);
     }
@@ -160,7 +161,7 @@ public class BZWToolsWindow : EditorWindow
     public void AddTeleporter()
     {
         Teleporter t = new Teleporter();
-        t.Size = new BZFlag.IO.Types.Vector3F(0.25f, 3, 10);
+        t.Size = new BZFlag.Data.Types.Vector3F(0.25f, 3, 10);
         t.Border = 0.5f;
         t.Name = "NewTeleporter_" + t.GUID;
         FromBZW.NewMapObject<BZWTeleporter>(t);
@@ -197,7 +198,7 @@ public class BZWToolsWindow : EditorWindow
 
 	public void AddPhysics()
 	{
-		BZFlag.IO.Elements.Physics t = new BZFlag.IO.Elements.Physics();
+		BZFlag.Map.Elements.Physics t = new BZFlag.Map.Elements.Physics();
 		t.Name = "NewPhysics_" + t.GUID;
 		FromBZW.NewMapObject<BZWPhysics>(t);
 	}

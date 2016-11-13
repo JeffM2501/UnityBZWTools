@@ -22,7 +22,7 @@ public class BZWPhaseableObject : BZWBasicObject
 	
 	}
 
-	public virtual void FromBZWObject(BZFlag.IO.Elements.Shapes.PhaseableObject obj)
+	public virtual void FromBZWObject(BZFlag.Map.Elements.Shapes.PhaseableObject obj)
 	{
 		Name = obj.Name;
 		SetupFromPoisitionalbe(obj);
@@ -34,7 +34,7 @@ public class BZWPhaseableObject : BZWBasicObject
 		GUID = obj.GUID;
 	}
 
-	protected virtual BZFlag.IO.Elements.Shapes.PhaseableObject OutputToPhaseable(BZFlag.IO.Elements.Shapes.PhaseableObject obj)
+	protected virtual BZFlag.Map.Elements.Shapes.PhaseableObject OutputToPhaseable(BZFlag.Map.Elements.Shapes.PhaseableObject obj)
 	{
 		OutputToPoisitionalbe(obj);
 		obj.Attributes = Attributes;

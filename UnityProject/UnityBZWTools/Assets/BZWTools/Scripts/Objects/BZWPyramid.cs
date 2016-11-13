@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using BZFlag.IO.Elements;
-using BZFlag.IO.Elements.Shapes;
+using BZFlag.Map.Elements;
+using BZFlag.Map.Elements.Shapes;
 
 public class BZWPyramid : BZWPhaseableObject
 {
@@ -28,7 +28,7 @@ public class BZWPyramid : BZWPhaseableObject
 
 	public override BasicObject ToBZWObject()
 	{
-		var obj = OutputToPhaseable(new Pyramid()) as BZFlag.IO.Elements.Shapes.Pyramid;
+		var obj = OutputToPhaseable(new Pyramid()) as BZFlag.Map.Elements.Shapes.Pyramid;
 		obj.FlipZ = FlipZ;
 		return obj;
 	}

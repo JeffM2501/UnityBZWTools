@@ -3,8 +3,8 @@ using UnityEditor;
 using System;
 using System.Collections.Generic;
 
-using BZFlag.IO.Elements;
-using BZFlag.IO.Elements.Shapes;
+using BZFlag.Map.Elements;
+using BZFlag.Map.Elements.Shapes;
 
 public class BZWTeleporter : BZWBasicObject
 {
@@ -28,7 +28,7 @@ public class BZWTeleporter : BZWBasicObject
 	
 	}
 
-	public virtual void FromBZWObject(BZFlag.IO.Elements.Shapes.Teleporter tp)
+	public virtual void FromBZWObject(BZFlag.Map.Elements.Shapes.Teleporter tp)
 	{
 		Name = tp.Name;
 		SetupFromPoisitionalbe(tp);
@@ -40,9 +40,9 @@ public class BZWTeleporter : BZWBasicObject
 		Horizontal = tp.Horizontal;
 	}
 
-	public override BZFlag.IO.Elements.BasicObject ToBZWObject()
+	public override BZFlag.Map.Elements.BasicObject ToBZWObject()
 	{
-		var obj = new BZFlag.IO.Elements.Shapes.Teleporter();
+		var obj = new BZFlag.Map.Elements.Shapes.Teleporter();
 
 		if(name == string.Empty)
 			name = Index.ToString();

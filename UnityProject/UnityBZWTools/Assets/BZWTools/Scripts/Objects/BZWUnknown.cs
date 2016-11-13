@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System;
-using BZFlag.IO.Elements;
+using BZFlag.Map.Elements;
 
 public class BZWUnknown : BZWBasicObject
 {
@@ -26,16 +26,16 @@ public class BZWUnknown : BZWBasicObject
 	{
 		ObjectType = obj.ObjectType;
 		Name = obj.Name;
-		CodeLines = obj.Code;
+		CodeLines = obj.Attributes;
 		GUID = obj.GUID;
 	}
 
-	public override BZFlag.IO.Elements.BasicObject ToBZWObject()
+	public override BZFlag.Map.Elements.BasicObject ToBZWObject()
 	{
-		var obj = new BZFlag.IO.Elements.BasicObject();
+		var obj = new BZFlag.Map.Elements.BasicObject();
 
 		obj.ObjectType = ObjectType;
-		obj.Code = CodeLines;
+		obj.Attributes = CodeLines;
 		obj.GUID = GUID;
 
 		return obj;

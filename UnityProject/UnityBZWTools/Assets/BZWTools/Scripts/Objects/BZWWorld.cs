@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections.Generic;
-using BZFlag.IO.Elements;
+using BZFlag.Map.Elements;
 
 public class BZWWorld : BZWBasicObject
 {
@@ -25,7 +25,7 @@ public class BZWWorld : BZWBasicObject
 	
 	}
 
-	public virtual void FromBZWObject(BZFlag.IO.Elements.World world)
+	public virtual void FromBZWObject(BZFlag.Map.Elements.World world)
 	{
 		Name = world.Name;
 		Size = world.Size;
@@ -36,9 +36,9 @@ public class BZWWorld : BZWBasicObject
 		Attributes = world.Attributes;
 	}
 
-	public override BZFlag.IO.Elements.BasicObject ToBZWObject()
+	public override BZFlag.Map.Elements.BasicObject ToBZWObject()
 	{
-		var world =  new BZFlag.IO.Elements.World();
+		var world =  new BZFlag.Map.Elements.World();
 
 		world.Name = Name;
 		world.Size = Size;

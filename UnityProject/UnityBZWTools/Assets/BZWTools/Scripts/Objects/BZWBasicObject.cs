@@ -19,25 +19,25 @@ public class BZWBasicObject : MonoBehaviour
 
 	}
 
-	public virtual void FromBZWObject(BZFlag.IO.Elements.BasicObject obj)
+	public virtual void FromBZWObject(BZFlag.Map.Elements.BasicObject obj)
 	{
 		Name = obj.Name;
 		GUID = obj.GUID;
 	}
 
-	public virtual BZFlag.IO.Elements.BasicObject ToBZWObject()
+	public virtual BZFlag.Map.Elements.BasicObject ToBZWObject()
 	{
-		return new BZFlag.IO.Elements.BasicObject();
+		return new BZFlag.Map.Elements.BasicObject();
 	}
 
-	public void SetupFromPoisitionalbe(BZFlag.IO.Elements.Shapes.PositionableObject p)
+	public void SetupFromPoisitionalbe(BZFlag.Map.Elements.Shapes.PositionableObject p)
 	{
 		this.transform.localPosition = new Vector3(p.Position[0], p.Position[2], p.Position[1]);
 		this.transform.localRotation = Quaternion.AngleAxis(-p.Rotation, Vector3.up);
 		this.transform.localScale = new Vector3(p.Size[0], p.Size[2], p.Size[1]);
 	}
 
-	public void OutputToPoisitionalbe(BZFlag.IO.Elements.Shapes.PositionableObject p)
+	public void OutputToPoisitionalbe(BZFlag.Map.Elements.Shapes.PositionableObject p)
 	{
 		p.Name = Name;
 
@@ -52,7 +52,7 @@ public class BZWBasicObject : MonoBehaviour
 		p.Size[1] = this.transform.localScale.z;
 	}
 
-    public virtual void Setup(BZFlag.IO.Elements.BasicObject elementObject)
+    public virtual void Setup(BZFlag.Map.Elements.BasicObject elementObject)
     {
         FromBZWObject(elementObject);
         BuildGeometry();

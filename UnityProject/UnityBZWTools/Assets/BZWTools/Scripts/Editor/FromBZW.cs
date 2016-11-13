@@ -4,16 +4,17 @@ using System.Collections;
 using System.IO;
 using System;
 
-using BZFlag.IO;
-using BZFlag.IO.Elements;
-using BZFlag.IO.Elements.Shapes;
+using BZFlag.IO.BZW;
+using BZFlag.Map;
+using BZFlag.Map.Elements;
+using BZFlag.Map.Elements.Shapes;
 
 using System.Collections.Generic;
 
 public class FromBZW
 {
 
-    public static void SetupRootObject(GameObject worldObj, Map map)
+    public static void SetupRootObject(GameObject worldObj, WorldMap map)
 	{
         BZWWorld mapRoot = worldObj.AddComponent<BZWWorld>();
         mapRoot.Setup(map.WorldInfo);
@@ -35,7 +36,7 @@ public class FromBZW
         return obj;
     }
 
-    public static GameObject NewMapObject<T>(BZFlag.IO.Elements.BasicObject obj) where T : BZWBasicObject
+    public static GameObject NewMapObject<T>(BZFlag.Map.Elements.BasicObject obj) where T : BZWBasicObject
     {
         string name = obj.Name;
         if (name == string.Empty)
@@ -49,7 +50,7 @@ public class FromBZW
         return gb;
     }
 
-    public static GameObject AddMapObject<T>(GameObject gb, BZFlag.IO.Elements.BasicObject obj) where T : BZWBasicObject
+    public static GameObject AddMapObject<T>(GameObject gb, BZFlag.Map.Elements.BasicObject obj) where T : BZWBasicObject
     {
         AddToRoot(BZWToolsWindow.GetRoot(), gb);
         T bzw = gb.AddComponent<T>();
@@ -63,7 +64,7 @@ public class FromBZW
         return gb;
     }
 
-	public static GameObject CreateNewBZWRoot(Map map)
+	public static GameObject CreateNewBZWRoot(WorldMap map)
 	{
 		// build the root world
 		GameObject worldObj = new GameObject("World_" + map.WorldInfo.Name);
@@ -97,21 +98,21 @@ public class FromBZW
 				else
 					name = m.ObjectType + "_" + count.ToString();
 
-				if(m as BZFlag.IO.Elements.Shapes.Base != null)
+				if(m as BZFlag.Map.Elements.Shapes.Base != null)
                     NewMapObject<BZWBase>(m);
-                else if(m as BZFlag.IO.Elements.Shapes.Box != null)
+                else if(m as BZFlag.Map.Elements.Shapes.Box != null)
                     NewMapObject<BZWBox>(m);
-                else if(m as BZFlag.IO.Elements.Shapes.Pyramid != null)
+                else if(m as BZFlag.Map.Elements.Shapes.Pyramid != null)
                     NewMapObject<BZWPyramid>(m);
-                else if(m as BZFlag.IO.Elements.Shapes.Teleporter != null)
+                else if(m as BZFlag.Map.Elements.Shapes.Teleporter != null)
                     NewMapObject<BZWTeleporter>(m);
-                else if(m as BZFlag.IO.Elements.Link != null)
+                else if(m as BZFlag.Map.Elements.Link != null)
                     NewMapObject<BZWLink>(m);
-                else if (m as BZFlag.IO.Elements.WaterLevel != null)
+                else if (m as BZFlag.Map.Elements.WaterLevel != null)
                     NewMapObject<BZWWaterLevel>(m);
-				else if(m as BZFlag.IO.Elements.Physics != null)
+				else if(m as BZFlag.Map.Elements.Physics != null)
 					NewMapObject<BZWPhysics>(m);
-				else if(m as BZFlag.IO.Elements.Shapes.Zone != null)
+				else if(m as BZFlag.Map.Elements.Shapes.Zone != null)
 					AddMapObject<BZWZone>(GetZonePrefab(), m);
 				else
                     NewMapObject<BZWUnknown>(m);

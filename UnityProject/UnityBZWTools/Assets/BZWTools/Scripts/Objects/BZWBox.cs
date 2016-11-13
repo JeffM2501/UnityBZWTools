@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using BZFlag.IO.Elements;
-using BZFlag.IO.Elements.Shapes;
+using BZFlag.Map.Elements;
+using BZFlag.Map.Elements.Shapes;
 
 public class BZWBox : BZWPhaseableObject
 {

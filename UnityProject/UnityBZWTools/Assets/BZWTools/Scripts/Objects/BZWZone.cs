@@ -4,14 +4,15 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-using BZFlag.IO.Elements.Shapes;
+using BZFlag.Map.Elements.Shapes;
+using BZFlag.Data.Teams;
 
 public class BZWZone : BZWBasicObject
 {
     public List<string> Flags = new List<string>();
     public List<string> ZoneFlags = new List<string>();
-    public List<Base.TeamColors> Safe = new List<Base.TeamColors>();
-    public List<Base.TeamColors> Team = new List<Base.TeamColors>();
+    public List<TeamColors> Safe = new List<TeamColors>();
+    public List<TeamColors> Team = new List<TeamColors>();
 
     // Use this for initialization
     void Start()
@@ -25,9 +26,9 @@ public class BZWZone : BZWBasicObject
 
     }
 
-    public virtual void FromBZWObject(BZFlag.IO.Elements.Shapes.Zone zone)
+    public virtual void FromBZWObject(BZFlag.Map.Elements.Shapes.Zone zone)
     {
-        base.FromBZWObject(zone as BZFlag.IO.Elements.Shapes.PositionableObject);
+        base.FromBZWObject(zone as BZFlag.Map.Elements.Shapes.PositionableObject);
 
         Flags = zone.Flags;
         ZoneFlags = zone.Flags;
@@ -35,9 +36,9 @@ public class BZWZone : BZWBasicObject
         Team = zone.Team;
     }
 
-    public override BZFlag.IO.Elements.BasicObject ToBZWObject()
+    public override BZFlag.Map.Elements.BasicObject ToBZWObject()
     {
-        var obj = new BZFlag.IO.Elements.Shapes.Zone();
+        var obj = new BZFlag.Map.Elements.Shapes.Zone();
         OutputToPoisitionalbe(obj);
         obj.Flags = Flags;
         obj.ZoneFlags = ZoneFlags;

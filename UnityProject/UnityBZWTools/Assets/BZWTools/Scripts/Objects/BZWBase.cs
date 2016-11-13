@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using BZFlag.IO.Elements.Shapes;
-using BZFlag.IO.Elements;
+
+using BZFlag.Data.Teams;
+using BZFlag.Map.Elements.Shapes;
+using BZFlag.Map.Elements;
 
 public class BZWBase : BZWBox
 {
@@ -31,7 +33,7 @@ public class BZWBase : BZWBox
 	{
 		base.FromBZWObject(b);
 
-		BZFlag.IO.Elements.Shapes.Base bs = b as Base;
+		BZFlag.Map.Elements.Shapes.Base bs = b as Base;
 		if(bs != null)
 			TeamColor = (BaseColors)bs.TeamColor;
 	}
@@ -39,7 +41,7 @@ public class BZWBase : BZWBox
 	public override BasicObject ToBZWObject()
 	{
 		var obj = OutputToPhaseable(new Base()) as Base;
-		obj.TeamColor = (BZFlag.IO.Elements.Shapes.Base.TeamColors)TeamColor;
+		obj.TeamColor = (TeamColors)TeamColor;
 		return obj;
 	}
 

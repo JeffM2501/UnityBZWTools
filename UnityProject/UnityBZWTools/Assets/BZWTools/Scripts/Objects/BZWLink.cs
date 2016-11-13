@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections.Generic;
-using BZFlag.IO.Elements;
+using BZFlag.Map.Elements;
 
 public class BZWLink : BZWBasicObject
 {
@@ -20,7 +20,7 @@ public class BZWLink : BZWBasicObject
 		public TargetSides TargetSide = TargetSides.Front;
 		public bool Wildcard = false;
 
-		public void FromBZW(BZFlag.IO.Elements.Link.PorterLink link)
+		public void FromBZW(BZFlag.Map.Elements.Link.PorterLink link)
 		{
 			Group = link.TargetGroup;
 			Target = link.TargetName;
@@ -28,9 +28,9 @@ public class BZWLink : BZWBasicObject
 			TargetSide = link.Front ? TargetSides.Front : TargetSides.Back;
 		}
 
-		public BZFlag.IO.Elements.Link.PorterLink ToBZW( )
+		public BZFlag.Map.Elements.Link.PorterLink ToBZW( )
 		{
-			BZFlag.IO.Elements.Link.PorterLink link = new BZFlag.IO.Elements.Link.PorterLink();
+			BZFlag.Map.Elements.Link.PorterLink link = new BZFlag.Map.Elements.Link.PorterLink();
 
 			link.TargetGroup = Group ;
 			link.TargetName = Target;
@@ -58,7 +58,7 @@ public class BZWLink : BZWBasicObject
 	
 	}
 
-	public virtual void FromBZWObject(BZFlag.IO.Elements.Link link)
+	public virtual void FromBZWObject(BZFlag.Map.Elements.Link link)
 	{
 		Name = link.Name;
 
@@ -68,9 +68,9 @@ public class BZWLink : BZWBasicObject
 		Attributes = link.Attributes;
 	}
 
-	public override BZFlag.IO.Elements.BasicObject ToBZWObject()
+	public override BZFlag.Map.Elements.BasicObject ToBZWObject()
 	{
-		var link = new BZFlag.IO.Elements.Link();
+		var link = new BZFlag.Map.Elements.Link();
 
 		link.Name = Name;
 		link.From = From.ToBZW();

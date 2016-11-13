@@ -4,8 +4,8 @@ using System.Collections;
 using System.IO;
 using System;
 
-using BZFlag.IO;
-using BZFlag.IO.Elements.Shapes;
+using BZFlag.IO.BZW;
+using BZFlag.Map;
 
 public class IOMenus : MonoBehaviour
 {
@@ -50,7 +50,7 @@ public class IOMenus : MonoBehaviour
 	[MenuItem("BZWTools/Save/Save BZW")]
 	static void SavetBZW()
 	{
-		Map map = ToBZW.BuildBZW();
+		WorldMap map = ToBZW.BuildBZW();
 
 		if (map == null)
 		{
@@ -67,7 +67,7 @@ public class IOMenus : MonoBehaviour
 	[MenuItem("BZWTools/New Map")]
 	static void NewBZW()
 	{
-		FromBZW.CreateNewBZWRoot(new Map());
+		FromBZW.CreateNewBZWRoot(new WorldMap());
 	}
 
 	[MenuItem("BZWTools/Windows/Show BZWTools")]
