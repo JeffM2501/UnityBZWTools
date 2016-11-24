@@ -145,29 +145,30 @@ public class BaseBuilder
 		filter.sharedMesh = mesh;
 
 		MeshRenderer render = obj.AddComponent<MeshRenderer>() as MeshRenderer;
-
-		switch(b.TeamColor)
-		{
-			case BZWBase.BaseColors.Red:
-				render.sharedMaterial = (Material)AssetDatabase.LoadAssetAtPath("Assets/BZWTools/StandardAssets/Textures/red_basewall.mat", typeof(Material));
-				break;
-
-			case BZWBase.BaseColors.Green:
-				render.sharedMaterial = (Material)AssetDatabase.LoadAssetAtPath("Assets/BZWTools/StandardAssets/Textures/green_basewall.mat", typeof(Material));
-				break;
-
-			case BZWBase.BaseColors.Blue:
-				render.sharedMaterial = (Material)AssetDatabase.LoadAssetAtPath("Assets/BZWTools/StandardAssets/Textures/blue_basewall.mat", typeof(Material));
-				break;
-
-			case BZWBase.BaseColors.Purple:
-				render.sharedMaterial = (Material)AssetDatabase.LoadAssetAtPath("Assets/BZWTools/StandardAssets/Textures/purple_basewall.mat", typeof(Material));
-				break;
-		}
-
+		render.sharedMaterial = GetTeamWallMaterial(b.TeamColor);
+		
 		MeshCollider collider = obj.AddComponent<MeshCollider>() as MeshCollider;
 		collider.sharedMesh = mesh;
 		obj.isStatic = true;
+	}
+
+	public static Material GetTeamWallMaterial( BZWBase.BaseColors teamColor)
+	{
+		switch(teamColor)
+		{
+			default:
+			case BZWBase.BaseColors.Red:
+				return  (Material)AssetDatabase.LoadAssetAtPath("Assets/BZWTools/StandardAssets/Textures/red_basewall.mat", typeof(Material));
+
+			case BZWBase.BaseColors.Green:
+				return (Material)AssetDatabase.LoadAssetAtPath("Assets/BZWTools/StandardAssets/Textures/green_basewall.mat", typeof(Material));
+
+			case BZWBase.BaseColors.Blue:
+				return (Material)AssetDatabase.LoadAssetAtPath("Assets/BZWTools/StandardAssets/Textures/blue_basewall.mat", typeof(Material));
+
+			case BZWBase.BaseColors.Purple:
+				return (Material)AssetDatabase.LoadAssetAtPath("Assets/BZWTools/StandardAssets/Textures/purple_basewall.mat", typeof(Material));
+		}
 	}
 
 	public static void BuildRoof(GameObject obj, BZWBase b)
@@ -252,28 +253,29 @@ public class BaseBuilder
 		filter.sharedMesh = mesh;
 
 		MeshRenderer render = obj.AddComponent<MeshRenderer>() as MeshRenderer;
-
-		switch(b.TeamColor)
-		{
-			case BZWBase.BaseColors.Red:
-				render.sharedMaterial = (Material)AssetDatabase.LoadAssetAtPath("Assets/BZWTools/StandardAssets/Textures/red_basetop.mat", typeof(Material));
-				break;
-
-			case BZWBase.BaseColors.Green:
-				render.sharedMaterial = (Material)AssetDatabase.LoadAssetAtPath("Assets/BZWTools/StandardAssets/Textures/green_basetop.mat", typeof(Material));
-				break;
-
-			case BZWBase.BaseColors.Blue:
-				render.sharedMaterial = (Material)AssetDatabase.LoadAssetAtPath("Assets/BZWTools/StandardAssets/Textures/blue_basetop.mat", typeof(Material));
-				break;
-
-			case BZWBase.BaseColors.Purple:
-				render.sharedMaterial = (Material)AssetDatabase.LoadAssetAtPath("Assets/BZWTools/StandardAssets/Textures/purple_basetop.mat", typeof(Material));
-				break;
-		}
+		render.sharedMaterial = GetTeamTopMaterial(b.TeamColor);
 
 		MeshCollider collider = obj.AddComponent<MeshCollider>() as MeshCollider;
 		collider.sharedMesh = mesh;
 		obj.isStatic = true;
+	}
+
+	public static Material GetTeamTopMaterial(BZWBase.BaseColors teamColor)
+	{
+		switch(teamColor)
+		{
+			default:
+			case BZWBase.BaseColors.Red:
+				return (Material)AssetDatabase.LoadAssetAtPath("Assets/BZWTools/StandardAssets/Textures/red_basetop.mat", typeof(Material));
+
+			case BZWBase.BaseColors.Green:
+				return (Material)AssetDatabase.LoadAssetAtPath("Assets/BZWTools/StandardAssets/Textures/green_basetop.mat", typeof(Material));
+
+			case BZWBase.BaseColors.Blue:
+				return (Material)AssetDatabase.LoadAssetAtPath("Assets/BZWTools/StandardAssets/Textures/blue_basetop.mat", typeof(Material));
+
+			case BZWBase.BaseColors.Purple:
+				return (Material)AssetDatabase.LoadAssetAtPath("Assets/BZWTools/StandardAssets/Textures/purple_basetop.mat", typeof(Material));
+		}
 	}
 }

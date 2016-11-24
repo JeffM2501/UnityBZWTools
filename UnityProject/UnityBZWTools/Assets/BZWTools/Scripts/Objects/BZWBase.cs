@@ -56,17 +56,43 @@ public class BZWBase : BZWBox
         List<GameObject> toKill = new List<GameObject>();
         foreach (Transform c in transform)
         {
-            if (c.gameObject.name == "_Walls")
+			if (c.gameObject.name == "_Walls")
             {
-                GameObject.Destroy(c.gameObject);
-                break;
+				toKill.Add(c.gameObject);
             }
         }
 
-        GameObject newObj = new GameObject("_Walls");
+		foreach(var c in toKill)
+			GameObject.Destroy(c);
+
+		toKill = null;
+
+		GameObject newObj = new GameObject("_Walls");
         newObj.transform.SetParent(transform, false);
 
         BaseBuilder.BuildRoof(gameObject, this);
         BaseBuilder.BuildWalls(newObj, this);
     }
+
+	public void OnValidate()
+	{
+		SetTeamColorMats();
+	}
+
+	void SetTeamColorMats()
+	{
+		MeshRenderer r = GetComponent<MeshRenderer>();
+		if(r != null)
+			r.sharedMaterial = BaseBuilder.GetTeamTopMaterial(TeamColor);
+
+		foreach(Transform c in transform)
+		{
+			if(c.gameObject.name == "_Walls")
+			{
+				r = c.gameObject.GetComponent<MeshRenderer>();
+				if(r != null)
+					r.sharedMaterial = BaseBuilder.GetTeamWallMaterial(TeamColor);
+			}
+		}
+	}
 }
