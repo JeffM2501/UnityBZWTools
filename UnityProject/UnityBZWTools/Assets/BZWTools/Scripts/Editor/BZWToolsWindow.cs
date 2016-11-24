@@ -177,6 +177,8 @@ public class BZWToolsWindow : EditorWindow
     public void AddBase()
     {
         Base t = new Base();
+		t.Size = new BZFlag.Data.Types.Vector3F(1, 1, 1);
+		t.TeamColor = BZFlag.Data.Teams.TeamColors.RedTeam;
         t.Name = "NewBase_" + t.GUID;
         FromBZW.NewMapObject<BZWBase>(t);
     }
