@@ -36,7 +36,6 @@ public class BZWBox : BZWPhaseableObject
 
     public override void BuildGeometry()
     {
-        List<GameObject> toKill = new List<GameObject>();
         foreach (Transform c in transform)
         {
             if (c.gameObject.name == "_Walls")
