@@ -145,15 +145,15 @@ public class PyramidBuilder
 		Vector3 pyrScale = pyr.transform.localScale;
 
 		// Z+ wall
-		verts.Add(new Vector3(-1, 1, 1));
+		verts.Add(new Vector3(-1, 0, 1));
 		norms.Add(Vector3.forward);
 		uvs.Add(new Vector2(-pyrScale.x * PyrmaidUVScale, 0));
 
-		verts.Add(new Vector3(0, 0, 0));
+		verts.Add(new Vector3(0, -1, 0));
 		norms.Add(Vector3.forward);
 		uvs.Add(new Vector2(CenterUV, pyrScale.z * PyrmaidUVScale));
 
-		verts.Add(new Vector3(1, 1, 1));
+		verts.Add(new Vector3(1, 0, 1));
 		norms.Add(Vector3.forward);
 		uvs.Add(new Vector2(pyrScale.x * PyrmaidUVScale, 0));
 
@@ -164,15 +164,15 @@ public class PyramidBuilder
 		offset = verts.Count;
 
 		// Z- wall
-		verts.Add(new Vector3(-1, 1, -1));
+		verts.Add(new Vector3(-1, 0, -1));
 		norms.Add(Vector3.back);
 		uvs.Add(new Vector2(-pyrScale.x * PyrmaidUVScale, 0));
 
-		verts.Add(new Vector3(0, 0, 0));
+		verts.Add(new Vector3(0, -1, 0));
 		norms.Add(Vector3.back);
 		uvs.Add(new Vector2(CenterUV, pyrScale.z * PyrmaidUVScale));
 
-		verts.Add(new Vector3(1, 1, -1));
+		verts.Add(new Vector3(1, 0, -1));
 		norms.Add(Vector3.back);
 		uvs.Add(new Vector2(pyrScale.x * PyrmaidUVScale, 0));
 
@@ -184,15 +184,15 @@ public class PyramidBuilder
 
 
 		// X+ wall
-		verts.Add(new Vector3(1, 1, 1));
+		verts.Add(new Vector3(1, 0, 1));
 		norms.Add(Vector3.right);
 		uvs.Add(new Vector2(-pyrScale.z * PyrmaidUVScale, 0));
 
-		verts.Add(new Vector3(0, 0, 0));
+		verts.Add(new Vector3(0, -1, 0));
 		norms.Add(Vector3.right);
 		uvs.Add(new Vector2(CenterUV, pyrScale.z * PyrmaidUVScale));
 
-		verts.Add(new Vector3(1, 1, -1));
+		verts.Add(new Vector3(1, 0, -1));
 		norms.Add(Vector3.right);
 		uvs.Add(new Vector2(pyrScale.z * PyrmaidUVScale, 0));
 
@@ -203,15 +203,15 @@ public class PyramidBuilder
 		offset = verts.Count;
 
 		// X- wall
-		verts.Add(new Vector3(-1, 1, 1));
+		verts.Add(new Vector3(-1, 0, 1));
 		norms.Add(Vector3.left);
 		uvs.Add(new Vector2(-pyrScale.z * PyrmaidUVScale, 0));
 
-		verts.Add(new Vector3(0, 0, 0));
+		verts.Add(new Vector3(0, -1, 0));
 		norms.Add(Vector3.left);
 		uvs.Add(new Vector2(CenterUV, pyrScale.z * PyrmaidUVScale));
 
-		verts.Add(new Vector3(-1, 1, -1));
+		verts.Add(new Vector3(-1, 0, -1));
 		norms.Add(Vector3.left);
 		uvs.Add(new Vector2(pyrScale.z * PyrmaidUVScale, 0));
 
@@ -222,19 +222,19 @@ public class PyramidBuilder
 		offset = verts.Count;
 
 		// floor
-		verts.Add(new Vector3(-1, 1, 1));
+		verts.Add(new Vector3(-1, 0, 1));
 		norms.Add(Vector3.up);
 		uvs.Add(new Vector2(-pyrScale.x * PyrmaidUVScale, pyrScale.z * PyrmaidUVScale));
 
-		verts.Add(new Vector3(1, 1, 1));
+		verts.Add(new Vector3(1, 0, 1));
 		norms.Add(Vector3.up);
 		uvs.Add(new Vector2(pyrScale.x * PyrmaidUVScale, pyrScale.z * PyrmaidUVScale));
 
-		verts.Add(new Vector3(1, 1, -1));
+		verts.Add(new Vector3(1, 0, -1));
 		norms.Add(Vector3.up);
 		uvs.Add(new Vector2(pyrScale.x * PyrmaidUVScale, -pyrScale.z * PyrmaidUVScale));
 
-		verts.Add(new Vector3(-1, 1, -1));
+		verts.Add(new Vector3(-1, 0, -1));
 		norms.Add(Vector3.up);
 		uvs.Add(new Vector2(-pyrScale.x * PyrmaidUVScale, -pyrScale.z * PyrmaidUVScale));
 
