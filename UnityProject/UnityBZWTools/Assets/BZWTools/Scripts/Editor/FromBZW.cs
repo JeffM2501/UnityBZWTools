@@ -86,18 +86,12 @@ public class FromBZW
 
 			var map = Reader.ReadMap(sr);
 			sr.Close();
-			GameObject worldObj = CreateNewBZWRoot(map);
+			CreateNewBZWRoot(map);
 
 			// add all the sub objects
 			int count = 1;
 			foreach(var m in map.Objects)
 			{
-				string name = string.Empty;
-				if(m.Name != string.Empty)
-					name = m.Name;
-				else
-					name = m.ObjectType + "_" + count.ToString();
-
 				if(m as BZFlag.Map.Elements.Shapes.Base != null)
                     NewMapObject<BZWBase>(m);
                 else if(m as BZFlag.Map.Elements.Shapes.Box != null)
